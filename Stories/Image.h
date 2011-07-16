@@ -9,5 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface Image : NSObject
+{
+    NSDictionary* m_dictionary;
+    NSString* m_html;
+}
+
+@property (nonatomic, readonly) NSURL* srcUrl;
+@property (nonatomic, readonly) NSURL* hrefUrl;
+
+@property (nonatomic, readonly) NSString* html;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

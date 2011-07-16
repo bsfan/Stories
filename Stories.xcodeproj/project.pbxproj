@@ -33,6 +33,8 @@
 		A6A309D213D2001600217831 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D113D2001600217831 /* Author.m */; };
 		A6A309D513D2033600217831 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D413D2033600217831 /* Story.m */; };
 		A6A309D813D20EAA00217831 /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D713D20EAA00217831 /* Element.m */; };
+		A6A309E613D21F5800217831 /* StoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309E513D21F5800217831 /* StoryView.m */; };
+		A6A309E913D22FEE00217831 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309E813D22FEE00217831 /* Image.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,10 @@
 		A6A309D413D2033600217831 /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
 		A6A309D613D20EAA00217831 /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Element.h; sourceTree = "<group>"; };
 		A6A309D713D20EAA00217831 /* Element.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Element.m; sourceTree = "<group>"; };
+		A6A309E413D21F5800217831 /* StoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryView.h; sourceTree = "<group>"; };
+		A6A309E513D21F5800217831 /* StoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryView.m; sourceTree = "<group>"; };
+		A6A309E713D22FEE00217831 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		A6A309E813D22FEE00217831 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +146,7 @@
 		09872CE713D1F897003FB29A /* Stories */ = {
 			isa = PBXGroup;
 			children = (
-				092738FD13D21A0400316B1C /* SearchView.h */,
-				092738FE13D21A0400316B1C /* SearchView.m */,
+				A6A309E213D21EF900217831 /* Views */,
 				092738FF13D21A0400316B1C /* SearchViewController.h */,
 				0927390013D21A0400316B1C /* SearchViewController.m */,
 				092738F913D2181E00316B1C /* ApplicationCore.h */,
@@ -230,8 +235,21 @@
 				A6A309D413D2033600217831 /* Story.m */,
 				A6A309D613D20EAA00217831 /* Element.h */,
 				A6A309D713D20EAA00217831 /* Element.m */,
+				A6A309E713D22FEE00217831 /* Image.h */,
+				A6A309E813D22FEE00217831 /* Image.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		A6A309E213D21EF900217831 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				092738FD13D21A0400316B1C /* SearchView.h */,
+				092738FE13D21A0400316B1C /* SearchView.m */,
+				A6A309E413D21F5800217831 /* StoryView.h */,
+				A6A309E513D21F5800217831 /* StoryView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +331,8 @@
 				A6A309D213D2001600217831 /* Author.m in Sources */,
 				A6A309D513D2033600217831 /* Story.m in Sources */,
 				A6A309D813D20EAA00217831 /* Element.m in Sources */,
+				A6A309E613D21F5800217831 /* StoryView.m in Sources */,
+				A6A309E913D22FEE00217831 /* Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
