@@ -18,10 +18,11 @@
     NSMutableArray* m_topicsUrl;
     NSMutableArray* m_elements;
 //    Stats* m_stats;
+    NSString* m_html;
 }
 
 @property (nonatomic, readonly) NSURL* permalinkUrl;
-@property (nonatomic, readonly) NSURL* permalinkJsonUrl;
+@property (nonatomic, readonly) NSURL* permalinkJsonUrl; // Use this to load the story content
 @property (nonatomic, readonly) NSDate* publishedAt;
 @property (nonatomic, readonly) Author* author;
 @property (nonatomic, readonly) NSArray* editors;
@@ -32,6 +33,8 @@
 @property (nonatomic, readonly) NSArray* topicsUrl;
 @property (nonatomic, readonly) NSArray* elements;
 //@property (nonatomic, readonly) Stats* stats;
+
+@property (nonatomic, readonly) NSString* html;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
