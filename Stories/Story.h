@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Author.h"
-#import "Element.h"
+
+@class Author;
 
 @interface Story : NSObject
 {

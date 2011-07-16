@@ -7,6 +7,8 @@
 //
 
 #import "Story.h"
+#import "Author.h"
+#import "Element.h"
 
 @implementation Story
 
