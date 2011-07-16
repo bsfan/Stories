@@ -17,6 +17,9 @@
 #import "ApplicationCore.h"
 
 
+NSString * const kAPITopicsURL = @"http://storify.com/topics/%@.json";
+
+
 @implementation ApplicationCore
 
 static ApplicationCore *s_applicationCore;

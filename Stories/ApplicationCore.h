@@ -17,6 +17,9 @@
 #import <Foundation/Foundation.h>
 
 
+extern NSString * const kAPITopicsURL;
+
+
 @interface ApplicationCore : NSObject {
     
 }
