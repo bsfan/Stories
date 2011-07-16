@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		092738FB13D2181E00316B1C /* ApplicationCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 092738FA13D2181E00316B1C /* ApplicationCore.m */; };
+		0927390113D21A0400316B1C /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 092738FE13D21A0400316B1C /* SearchView.m */; };
+		0927390213D21A0400316B1C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0927390013D21A0400316B1C /* SearchViewController.m */; };
 		09872CE213D1F897003FB29A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE113D1F897003FB29A /* UIKit.framework */; };
 		09872CE413D1F897003FB29A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE313D1F897003FB29A /* Foundation.framework */; };
 		09872CE613D1F897003FB29A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE513D1F897003FB29A /* CoreGraphics.framework */; };
@@ -33,6 +35,10 @@
 /* Begin PBXFileReference section */
 		092738F913D2181E00316B1C /* ApplicationCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationCore.h; sourceTree = "<group>"; };
 		092738FA13D2181E00316B1C /* ApplicationCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationCore.m; sourceTree = "<group>"; };
+		092738FD13D21A0400316B1C /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		092738FE13D21A0400316B1C /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
+		092738FF13D21A0400316B1C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		0927390013D21A0400316B1C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		09872CDD13D1F897003FB29A /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09872CE113D1F897003FB29A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		09872CE313D1F897003FB29A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -125,6 +131,10 @@
 		09872CE713D1F897003FB29A /* Stories */ = {
 			isa = PBXGroup;
 			children = (
+				092738FD13D21A0400316B1C /* SearchView.h */,
+				092738FE13D21A0400316B1C /* SearchView.m */,
+				092738FF13D21A0400316B1C /* SearchViewController.h */,
+				0927390013D21A0400316B1C /* SearchViewController.m */,
 				092738F913D2181E00316B1C /* ApplicationCore.h */,
 				092738FA13D2181E00316B1C /* ApplicationCore.m */,
 				09872CF013D1F897003FB29A /* StoriesAppDelegate.h */,
@@ -275,6 +285,8 @@
 				09872D2F13D1FB24003FB29A /* JSONKit.m in Sources */,
 				09872D3013D1FB24003FB29A /* Reachability.m in Sources */,
 				092738FB13D2181E00316B1C /* ApplicationCore.m in Sources */,
+				0927390113D21A0400316B1C /* SearchView.m in Sources */,
+				0927390213D21A0400316B1C /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,7 @@
 //
 
 #import "StoriesAppDelegate.h"
-
+#import "SearchViewController.h"
 
 @implementation StoriesAppDelegate
 
@@ -24,6 +24,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    SearchViewController *searchViewController = [[SearchViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
+    [searchViewController release];
+    
+    [[self window] setRootViewController:navigationController];
+    [navigationController release];
+    
+    
     [[self window] makeKeyAndVisible];
     return YES;
 }
