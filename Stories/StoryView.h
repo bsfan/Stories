@@ -13,6 +13,7 @@
 @interface StoryView : UIView
 {
     Story* m_story;
+    UIWebView* m_webView;
 }
 
 - (id)initWithFrame:(CGRect)frame story:(Story *)story;

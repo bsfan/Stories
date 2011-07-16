@@ -20,23 +20,26 @@
     self = [super initWithFrame:frame];
     if (self) {
         m_story = [story retain];
+        m_webView = [[[UIWebView alloc] initWithFrame:self.frame] retain];
+        [self addSubview:m_webView];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [m_webView removeFromSuperview];
+    [m_webView release];
     [m_story release];
     [self dealloc];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+//////////////////////////////////////////////////////////////
+#pragma mark - <#Section Name#>
+//////////////////////////////////////////////////////////////
+
+- (void)layoutSubviews
 {
-    // Drawing code
 }
-*/
 
 @end
