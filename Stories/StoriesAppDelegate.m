@@ -27,6 +27,7 @@
 
     SearchViewController *searchViewController = [[SearchViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
+    [[navigationController navigationBar] setBarStyle:UIBarStyleBlack];
     [searchViewController release];
     
     [[self window] setRootViewController:navigationController];
