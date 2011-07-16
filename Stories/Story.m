@@ -13,6 +13,7 @@
 @implementation Story
 
 @synthesize permalinkUrl;
+@synthesize permalinkJsonUrl;
 @synthesize publishedAt;
 @synthesize author = m_author;
 @synthesize editors = m_editors;
@@ -63,6 +64,11 @@
 - (NSURL *)permalinkUrl
 {
     return [NSURL URLWithString:[m_dictionary objectForKey:@"permalink"]];
+}
+
+- (NSURL *)permalinkJsonUrl
+{
+    return [NSURL URLWithString:[[m_dictionary objectForKey:@"permalink"] stringByAppendingString:@".json"]];
 }
 
 - (NSDate *)publishedAt

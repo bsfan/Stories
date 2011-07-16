@@ -21,6 +21,7 @@
 }
 
 @property (nonatomic, readonly) NSURL* permalinkUrl;
+@property (nonatomic, readonly) NSURL* permalinkJsonUrl;
 @property (nonatomic, readonly) NSDate* publishedAt;
 @property (nonatomic, readonly) Author* author;
 @property (nonatomic, readonly) NSArray* editors;
