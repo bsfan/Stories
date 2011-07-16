@@ -16,6 +16,10 @@
 
 #import "SearchViewController.h"
 #import "SearchView.h"
+#import "ASIHTTPRequest.h"
+#import "JSONKit.h"
+#import "Story.h"
+#import "StoriesViewController.h"
 
 
 @implementation SearchViewController
@@ -81,8 +85,50 @@
 #pragma mark - Actions
 
 - (void)performSearch:(id)sender {
-    //TODO: perform search!
-//    [self navigationController] pushViewController:<#(UIViewController *)#> animated:<#(BOOL)#>
+    NSString *query = [[_searchView searchTextField] text];
+    if (!query) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You have to enter a topic to perform a search." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kAPITopicsURL, [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setResponseEncoding:NSUTF8StringEncoding];
+    [request setCompletionBlock:^(void) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        if (200 == [request responseStatusCode]) {
+            NSString *response = [request responseString];
+
+            NSDictionary *responseDictionary = [response objectFromJSONString];
+            
+            NSInteger storyCount = [[responseDictionary objectForKey:@"count"] integerValue];
+            
+            if (storyCount > 0) {
+                [[_searchView searchTextField] resignFirstResponder];
+                
+                NSMutableArray *stories = [NSMutableArray arrayWithCapacity:storyCount];
+                for (NSDictionary *storyDictionary in [responseDictionary objectForKey:@"stories"]) {
+                    Story *story = [[Story alloc] initWithDictionary:storyDictionary];
+                    [stories addObject:story];
+                    [story release];
+                }
+                
+                StoriesViewController *storiesViewController = [[StoriesViewController alloc] initWithStories:stories];
+                [[self navigationController] pushViewController:storiesViewController animated:YES];
+                [storiesViewController release];
+                
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No stories have been found with this topic. Please retry." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }
+        }
+    }];
+    
+    [request startAsynchronous];
 }
 
 #pragma mark -

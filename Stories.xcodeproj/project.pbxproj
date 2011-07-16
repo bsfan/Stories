@@ -10,6 +10,7 @@
 		092738FB13D2181E00316B1C /* ApplicationCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 092738FA13D2181E00316B1C /* ApplicationCore.m */; };
 		0927390113D21A0400316B1C /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 092738FE13D21A0400316B1C /* SearchView.m */; };
 		0927390213D21A0400316B1C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0927390013D21A0400316B1C /* SearchViewController.m */; };
+		0970C75713D231F700442524 /* StoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970C75613D231F700442524 /* StoriesViewController.m */; };
 		09872CE213D1F897003FB29A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE113D1F897003FB29A /* UIKit.framework */; };
 		09872CE413D1F897003FB29A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE313D1F897003FB29A /* Foundation.framework */; };
 		09872CE613D1F897003FB29A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE513D1F897003FB29A /* CoreGraphics.framework */; };
@@ -42,6 +43,8 @@
 		092738FE13D21A0400316B1C /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		092738FF13D21A0400316B1C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		0927390013D21A0400316B1C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		0970C75513D231F700442524 /* StoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesViewController.h; sourceTree = "<group>"; };
+		0970C75613D231F700442524 /* StoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesViewController.m; sourceTree = "<group>"; };
 		09872CDD13D1F897003FB29A /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09872CE113D1F897003FB29A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		09872CE313D1F897003FB29A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,6 +149,8 @@
 				0927390013D21A0400316B1C /* SearchViewController.m */,
 				092738F913D2181E00316B1C /* ApplicationCore.h */,
 				092738FA13D2181E00316B1C /* ApplicationCore.m */,
+				0970C75513D231F700442524 /* StoriesViewController.h */,
+				0970C75613D231F700442524 /* StoriesViewController.m */,
 				A6A309CE13D1FFF000217831 /* Models */,
 				09872CF013D1F897003FB29A /* StoriesAppDelegate.h */,
 				09872CF113D1F898003FB29A /* StoriesAppDelegate.m */,
@@ -313,6 +318,7 @@
 				A6A309D213D2001600217831 /* Author.m in Sources */,
 				A6A309D513D2033600217831 /* Story.m in Sources */,
 				A6A309D813D20EAA00217831 /* Element.m in Sources */,
+				0970C75713D231F700442524 /* StoriesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
