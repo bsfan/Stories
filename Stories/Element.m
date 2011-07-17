@@ -119,7 +119,8 @@
              [self.source isEqualToString:@"SlideShare"])
     {
         // Embed
-        [tags addObject:self.oEmbedHtml];
+        if (self.oEmbedHtml)
+            [tags addObject:self.oEmbedHtml];
         
         // Title
         [tags addObject:@"<div class=\"title\">"];
@@ -142,10 +143,6 @@
         [tags addObject:@"</div>"];
         
         displayAuthor = YES;
-    }
-    else if ([self.source isEqualToString:@"Feedburner"])
-    {
-        // TODO: Support Feedburder source
     }
     else if ([self.source isEqualToString:@"flickr"])
     {
