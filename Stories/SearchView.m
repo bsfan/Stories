@@ -53,10 +53,10 @@
 }
 
 - (void)layoutSubviews {
-    CGRect searchTextFieldFrame = CGRectMake(280.0, 490.0, 335.0, 31.0);
+    CGRect searchTextFieldFrame = CGRectMake(280.0, 100.0, 335.0, 31.0);
     [_searchTextField setFrame:searchTextFieldFrame];
     
-    CGRect searchButtonFrame = CGRectMake(630.0, 484.0, 140.0, 45.0);
+    CGRect searchButtonFrame = CGRectMake(630.0, 94.0, 140.0, 45.0);
     [_searchButton setFrame:searchButtonFrame];
 }
 
