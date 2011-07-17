@@ -44,6 +44,7 @@
     _searchView = [[SearchView alloc] initWithFrame:CGRectZero];
     [_searchView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
     [[_searchView searchButton] addTarget:self action:@selector(performSearch:) forControlEvents:UIControlEventTouchUpInside];
+    [[_searchView searchTextField] setDelegate:self];
     
     [self setView:_searchView];
 }
@@ -129,6 +130,15 @@
     
     [request startAsynchronous];
 }
+
+
+#pragma mark - UITextFieldDelegate Protocol
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self performSearch:textField];
+    return YES;
+}
+
 
 #pragma mark -
 

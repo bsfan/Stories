@@ -18,7 +18,7 @@
 
 @class SearchView;
 
-@interface SearchViewController : UIViewController {
+@interface SearchViewController : UIViewController <UITextFieldDelegate> {
     SearchView *_searchView;
 }
 
