@@ -17,6 +17,9 @@
 #import "StoriesAppDelegate.h"
 #import "SearchViewController.h"
 
+#import "JSONKit.h"
+#import "Story.h"
+
 @implementation StoriesAppDelegate
 
 
@@ -33,7 +36,13 @@
     [[self window] setRootViewController:navigationController];
     [navigationController release];
     
-    
+    // DEBUG
+//    NSString* storyJson = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"new-story3" ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
+//    NSDictionary* storyDictionary = [storyJson objectFromJSONString];
+//    Story* story = [[[Story alloc] initWithDictionary:storyDictionary] autorelease];
+//    NSLog(@"%@", story.html);
+    // DEBUG
+
     [[self window] makeKeyAndVisible];
     return YES;
 }

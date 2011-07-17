@@ -10,6 +10,10 @@
 #import "Author.h"
 #import "Element.h"
 
+@interface Story()
+- (void)generateHtml;
+@end
+
 @implementation Story
 
 @synthesize permalinkUrl;
@@ -24,6 +28,8 @@
 @synthesize topicsUrl = m_topicsUrl;
 @synthesize elements = m_elements;
 //@synthesize stats = m_stats;
+
+@synthesize html = m_html;
 
 - (id)init
 {
@@ -44,7 +50,8 @@
         NSDictionary* elements = [dictionary objectForKey:@"elements"];
         for (NSString* key in elements)
             [m_elements addObject:[[Element alloc] initWithDictionary:[elements objectForKey:key]]];
-
+        
+        [self generateHtml];
     }
     
     return self;
@@ -52,6 +59,7 @@
 
 - (void)dealloc
 {
+    [m_html release];
 //    [m_stats release];
     [m_elements release];
     [m_topicsUrl release];
@@ -60,6 +68,32 @@
     [m_dictionary release];
     [super dealloc];
 }
+
+//////////////////////////////////////////////////////////////
+#pragma mark - Private methods
+//////////////////////////////////////////////////////////////
+
+- (void)generateHtml
+{
+    NSMutableArray* tags = [NSMutableArray array];
+    
+    [tags addObject:@"<div class=\"story\">"];
+    
+    [tags addObject:[NSString stringWithFormat:@"<h1>%@</h1>", self.title]];
+    [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\"/>By <a href=\"%@\">%@</a>, published at %@</h2>", self.author.avatarUrl, self.author.permalinkUrl, self.author.name, self.publishedAt]];
+    
+    for (Element* element in m_elements)
+        [tags addObject:element.html];
+    
+    [tags addObject:@"</div>"];
+
+    m_html = [tags componentsJoinedByString:@"\n"];
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark - Public methods
+//////////////////////////////////////////////////////////////
+
 
 - (NSURL *)permalinkUrl
 {

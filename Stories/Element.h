@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class Author;
+@class Image;
 
 @interface Element : NSObject
 {
     NSDictionary* m_dictionary;
     Author* m_author;
+    Image* m_image;
+    NSString* m_html;
 }
 
 //@property (nonatomic, readonly) Editor* editor;
@@ -27,7 +30,10 @@
 @property (nonatomic, readonly) Author* author;
 @property (nonatomic, readonly) NSDate* createdAt;
 @property (nonatomic, readonly) NSDate* addedAt;
-// image - src, href, host, width, height
+@property (nonatomic, readonly) NSString* oEmbedHtml;
+@property (nonatomic, readonly) Image* image;
+
+@property (nonatomic, readonly) NSString* html;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
