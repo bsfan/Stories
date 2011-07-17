@@ -21,6 +21,10 @@
     if (self) {
         m_story = [story retain];
         m_webView = [[[UIWebView alloc] initWithFrame:self.frame] retain];
+        
+//        NSString* HTMLString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"new-story3" ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
+//        [m_webView loadHTMLString:HTMLString baseURL:nil];
+        
         [self addSubview:m_webView];
     }
     return self;
@@ -35,7 +39,7 @@
 }
 
 //////////////////////////////////////////////////////////////
-#pragma mark - <#Section Name#>
+#pragma mark
 //////////////////////////////////////////////////////////////
 
 - (void)layoutSubviews
