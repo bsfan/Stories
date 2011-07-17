@@ -17,6 +17,10 @@
 		095269C713D340A10049BEE0 /* SearchBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 095269C613D340A10049BEE0 /* SearchBackground.png */; };
 		095269CA13D343C30049BEE0 /* StoriesBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269C913D343C30049BEE0 /* StoriesBrowserView.m */; };
 		095269CD13D349900049BEE0 /* StoryThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269CC13D349900049BEE0 /* StoryThumbView.m */; };
+		095269D513D353200049BEE0 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269D413D353200049BEE0 /* EGOImageView.m */; };
+		095269DC13D3544A0049BEE0 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269D913D3544A0049BEE0 /* EGOImageLoadConnection.m */; };
+		095269DD13D3544A0049BEE0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269DB13D3544A0049BEE0 /* EGOImageLoader.m */; };
+		095269E113D354D20049BEE0 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269E013D354D20049BEE0 /* EGOCache.m */; };
 		0970C75713D231F700442524 /* StoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970C75613D231F700442524 /* StoriesViewController.m */; };
 		09872CE213D1F897003FB29A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE113D1F897003FB29A /* UIKit.framework */; };
 		09872CE413D1F897003FB29A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE313D1F897003FB29A /* Foundation.framework */; };
@@ -63,6 +67,14 @@
 		095269C913D343C30049BEE0 /* StoriesBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesBrowserView.m; sourceTree = "<group>"; };
 		095269CB13D349900049BEE0 /* StoryThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryThumbView.h; sourceTree = "<group>"; };
 		095269CC13D349900049BEE0 /* StoryThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryThumbView.m; sourceTree = "<group>"; };
+		095269D313D353200049BEE0 /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
+		095269D413D353200049BEE0 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
+		095269D813D3544A0049BEE0 /* EGOImageLoadConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoadConnection.h; sourceTree = "<group>"; };
+		095269D913D3544A0049BEE0 /* EGOImageLoadConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoadConnection.m; sourceTree = "<group>"; };
+		095269DA13D3544A0049BEE0 /* EGOImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoader.h; sourceTree = "<group>"; };
+		095269DB13D3544A0049BEE0 /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
+		095269DF13D354D20049BEE0 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
+		095269E013D354D20049BEE0 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		0970C75513D231F700442524 /* StoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesViewController.h; sourceTree = "<group>"; };
 		0970C75613D231F700442524 /* StoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesViewController.m; sourceTree = "<group>"; };
 		09872CDD13D1F897003FB29A /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,7 +125,7 @@
 		A6A309E513D21F5800217831 /* StoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryView.m; sourceTree = "<group>"; };
 		A6A309E713D22FEE00217831 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		A6A309E813D22FEE00217831 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
-		A6C9876813D33F0B0045F676 /* winning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = winning.json; sourceTree = "<group>"; };
+		A6C9876813D33F0B0045F676 /* winning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = winning.json; sourceTree = "<group>"; };
 		A6E24EE913D34DB800F67813 /* base.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = base.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +165,35 @@
 				095269C013D337820049BEE0 /* SearchButton.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		095269D213D353200049BEE0 /* EGOImageView */ = {
+			isa = PBXGroup;
+			children = (
+				095269D313D353200049BEE0 /* EGOImageView.h */,
+				095269D413D353200049BEE0 /* EGOImageView.m */,
+			);
+			path = EGOImageView;
+			sourceTree = "<group>";
+		};
+		095269D713D3544A0049BEE0 /* EGOImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				095269D813D3544A0049BEE0 /* EGOImageLoadConnection.h */,
+				095269D913D3544A0049BEE0 /* EGOImageLoadConnection.m */,
+				095269DA13D3544A0049BEE0 /* EGOImageLoader.h */,
+				095269DB13D3544A0049BEE0 /* EGOImageLoader.m */,
+			);
+			path = EGOImageLoader;
+			sourceTree = "<group>";
+		};
+		095269DE13D354D20049BEE0 /* EGOCache */ = {
+			isa = PBXGroup;
+			children = (
+				095269DF13D354D20049BEE0 /* EGOCache.h */,
+				095269E013D354D20049BEE0 /* EGOCache.m */,
+			);
+			path = EGOCache;
 			sourceTree = "<group>";
 		};
 		09872CD213D1F897003FB29A = {
@@ -229,6 +270,9 @@
 				09872D0C13D1FB24003FB29A /* ASIHTTPRequest */,
 				09872D2113D1FB24003FB29A /* JSONKit */,
 				09872D2413D1FB24003FB29A /* Reachability */,
+				095269D213D353200049BEE0 /* EGOImageView */,
+				095269D713D3544A0049BEE0 /* EGOImageLoader */,
+				095269DE13D354D20049BEE0 /* EGOCache */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -395,6 +439,10 @@
 				A6A309E913D22FEE00217831 /* Image.m in Sources */,
 				095269CA13D343C30049BEE0 /* StoriesBrowserView.m in Sources */,
 				095269CD13D349900049BEE0 /* StoryThumbView.m in Sources */,
+				095269D513D353200049BEE0 /* EGOImageView.m in Sources */,
+				095269DC13D3544A0049BEE0 /* EGOImageLoadConnection.m in Sources */,
+				095269DD13D3544A0049BEE0 /* EGOImageLoader.m in Sources */,
+				095269E113D354D20049BEE0 /* EGOCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
