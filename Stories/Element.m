@@ -234,7 +234,12 @@
 
 - (NSString *)oEmbedHtml
 {
-    return [[m_dictionary objectForKey:@"oembed"] objectForKey:@"html"];
+    NSObject* object = [m_dictionary objectForKey:@"oembed"];
+    if ([object isKindOfClass:[NSDictionary class]])
+        return [(NSDictionary *) object objectForKey:@"html"];
+    else if ([object isKindOfClass:[NSString class]])
+        return (NSString *) object;
+    else return nil;
 }
 
 @end
