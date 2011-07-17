@@ -68,17 +68,29 @@
 
 - (void)generateHtml
 {
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:m"];
+
     NSMutableArray* tags = [NSMutableArray array];
     
     [tags addObject:[NSString stringWithFormat:@"<div class=\"story-element source-%@\">", self.source]];
     
+    BOOL displayAuthor = NO;
+    
     if ([self.source isEqualToString:@"storify"])
     {
-        // TODO: How to handle links to storify stories
-        // Text
-        [tags addObject:@"<div class=\"text\">"];
-        [tags addObject:self.description];
-        [tags addObject:@"</div>"];
+        if (self.oEmbedHtml == nil)
+        {
+            // Text
+            [tags addObject:@"<div class=\"text\">"];
+            [tags addObject:self.description];
+            [tags addObject:@"</div>"];
+        }
+        else
+        {
+            // Embedded story
+            [tags addObject:self.oEmbedHtml];
+        }
     }
     else if ([self.source isEqualToString:@"twitter"] ||
              [self.source isEqualToString:@"facebook"])
@@ -91,6 +103,8 @@
         [tags addObject:@"<div class=\"text\">"];
         [tags addObject:self.description];
         [tags addObject:@"</div>"];
+
+        displayAuthor = YES;
     }
     else if ([self.source isEqualToString:@"youtube"] ||
              [self.source isEqualToString:@"SlideShare"])
@@ -102,6 +116,8 @@
         [tags addObject:@"<div class=\"title\">"];
         [tags addObject:self.title];
         [tags addObject:@"</div>"];
+        
+        displayAuthor = YES;
     }
     else if ([self.source isEqualToString:@"xml"] ||
              [self.source isEqualToString:@"google"])
@@ -115,6 +131,8 @@
         [tags addObject:@"<div class=\"text\">"];
         [tags addObject:self.description];
         [tags addObject:@"</div>"];
+        
+        displayAuthor = YES;
     }
     else if ([self.source isEqualToString:@"Feedburner"])
     {
@@ -122,7 +140,14 @@
     }
     else if ([self.source isEqualToString:@"flickr"])
     {
-        // TODO: Support flickr source
+        // Image (if available)
+        if (self.image)
+            [tags addObject:self.image.html];
+        
+        // Title
+        [tags addObject:@"<div class=\"title\">"];
+        [tags addObject:[NSString stringWithFormat:@"<a href=\"%@\">Photo by %@</a>", self.permalinkUrl, self.title]];
+        [tags addObject:@"</div>"];
     }
     else
     {
@@ -130,7 +155,7 @@
     }
     
     // Author and date published
-    if (self.author)
+    if (displayAuthor == YES && self.author)
     {
         [tags addObject:@"<div class=\"author\">"];
         
@@ -139,17 +164,17 @@
         else
             [tags addObject:[NSString stringWithFormat:@"<span class=\"name\">%@</span>", self.author.name]];
         
-        [tags addObject:[NSString stringWithFormat:@"<span class=\"permalink\"><img src=\"%@\"/><a href=\"%@\">%@</a></span>", self.favIconUrl, self.permalinkUrl, self.createdAt]];
+        [tags addObject:[NSString stringWithFormat:@"<span class=\"permalink\"><img src=\"%@\"/><a href=\"%@\">%@</a></span>", self.favIconUrl, self.permalinkUrl, [dateFormatter stringFromDate:self.createdAt]]];
         
         if (self.author.avatarUrl)
             [tags addObject:[NSString stringWithFormat:@"<img class=\"avatar\" src=\"%@\"/>", self.author.avatarUrl]];
         
         [tags addObject:@"</div>"];	
-        
-        [tags addObject:@"</div>"];
-    }
+    }    
     
-    m_html = [tags componentsJoinedByString:@"\n"];
+    [tags addObject:@"</div>"];
+    
+    m_html = [[tags componentsJoinedByString:@"\n"] retain];
 }
 
 //////////////////////////////////////////////////////////////

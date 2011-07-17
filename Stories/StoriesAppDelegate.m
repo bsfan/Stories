@@ -37,7 +37,7 @@
     [navigationController release];
     
     // DEBUG
-//    NSString* storyJson = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"new-story3" ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
+//    NSString* storyJson = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"winning" ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
 //    NSDictionary* storyDictionary = [storyJson objectFromJSONString];
 //    Story* story = [[[Story alloc] initWithDictionary:storyDictionary] autorelease];
 //    NSLog(@"%@", story.html);

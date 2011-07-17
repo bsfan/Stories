@@ -46,10 +46,17 @@
         m_topicsUrl = [[[NSMutableArray alloc] init] retain];
         m_elements = [[[NSMutableArray alloc] init] retain];
 //        m_stats = [[[Stats alloc] initWithDictionary:[dictionary objectForKey:@"stats"]] retain];
-        
+
         NSDictionary* elements = [dictionary objectForKey:@"elements"];
-        for (NSString* key in elements)
-            [m_elements addObject:[[Element alloc] initWithDictionary:[elements objectForKey:key]]];
+        NSArray* elementsKeys = [elements allKeys];
+        
+        NSMutableArray* elementsKeysInt = [NSMutableArray arrayWithCapacity:elementsKeys.count];
+        for (NSString* key in elementsKeys) {
+            [elementsKeysInt addObject:[NSNumber numberWithInteger:[key integerValue]]];
+        }
+
+        for (NSNumber* key in [elementsKeysInt sortedArrayUsingSelector:@selector(compare:)])
+            [m_elements addObject:[[Element alloc] initWithDictionary:[elements objectForKey:[NSString stringWithFormat:@"%@", key]]]];
         
         [self generateHtml];
     }
@@ -75,19 +82,37 @@
 
 - (void)generateHtml
 {
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:m"];
+    
     NSMutableArray* tags = [NSMutableArray array];
     
+    [tags addObject:@"<html>"];
+    [tags addObject:@"<head>"];
+    [tags addObject:[NSString stringWithFormat:@"<title>%@</title>", self.title]];
+    [tags addObject:@"</head>"];
+    [tags addObject:@"<body>"];
+        
     [tags addObject:@"<div class=\"story\">"];
     
     [tags addObject:[NSString stringWithFormat:@"<h1>%@</h1>", self.title]];
-    [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\"/>By <a href=\"%@\">%@</a>, published at %@</h2>", self.author.avatarUrl, self.author.permalinkUrl, self.author.name, self.publishedAt]];
-    
+    [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\"/>By <a href=\"%@\">%@</a>, published on %@</h2>", self.author.avatarUrl, self.author.permalinkUrl, self.author.name, [dateFormatter stringFromDate:self.publishedAt]]];
+
+    if (self.description)
+        [tags addObject:[NSString stringWithFormat:@"<p class\"story-description\">%@</p>", self.description]];
+
     for (Element* element in m_elements)
-        [tags addObject:element.html];
+    {
+        if (![element.source isEqualToString:@"Feedburner"])
+            [tags addObject:element.html];
+    }
     
     [tags addObject:@"</div>"];
 
-    m_html = [tags componentsJoinedByString:@"\n"];
+    [tags addObject:@"</body>"];
+    [tags addObject:@"</html>"];
+
+    m_html = [[tags componentsJoinedByString:@"\n"] retain];
 }
 
 //////////////////////////////////////////////////////////////

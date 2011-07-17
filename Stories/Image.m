@@ -49,7 +49,7 @@
 
 - (void)generateHtml
 {
-    m_html = [NSString stringWithFormat:@"<a href=\"%@\"><img src=\"%@\"/></a>", self.hrefUrl, self.srcUrl];
+    m_html = [[NSString stringWithFormat:@"<a href=\"%@\"><img src=\"%@\"/></a>", self.hrefUrl, self.srcUrl] retain];
 }
 
 //////////////////////////////////////////////////////////////
@@ -58,12 +58,20 @@
 
 - (NSURL *)srcUrl
 {
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"src"]];
+    NSString* src = [m_dictionary objectForKey:@"src"];
+    if (src && [src isEqualToString:@"null"] == NO)
+        return [NSURL URLWithString:src];
+    else
+        return nil;
 }
 
 - (NSURL *)hrefUrl
 {
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"href"]];
+    NSString* href = [m_dictionary objectForKey:@"href"];
+    if (href && [href isEqualToString:@"null"] == NO)
+        return [NSURL URLWithString:href];
+    else
+        return nil;
 }
 
 @end
