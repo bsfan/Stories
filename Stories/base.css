@@ -1,0 +1,114 @@
+html {
+  font-family: Helvetica, Arial, sans-serif;
+  background: #f6f6f6;
+}
+body {
+  padding: 20px;
+  width: 1024px;
+}
+.story {
+  margin-top: 0;
+}
+h1 {
+  background: #627ea2;
+  display: inline-table;
+  width: 80px;
+  padding: 10px;
+  color: #f6f6f6;
+  float: left;
+}
+
+h2 {
+  float: right;
+  width: 600px;
+  font-size: 14px;
+  color: #C9C9C9;
+  font-weight: normal;
+  text-align: right;
+}
+
+h2 img {
+  -moz-box-shadow: 0px 1px 3px #ccc;
+  -webkit-box-shadow: 0px 1px 3px #ccc;
+  box-shadow: 0px 1px 3px #ccc;
+  position:relative;
+  top: 20px;
+  border: 4px solid #FFF;
+  margin-right: 10px;
+}
+h2 a {
+  color: #627ea2;
+}
+.author {
+  float:right;
+  margin:top: 10px;
+  font-size: 15px;
+}
+.author .name {
+  font-weight: bold;
+}
+.author img {
+  float: right;
+  margin-left: 10px;
+}
+.author span {
+  text-align: right;
+  position:relative;
+  top: 40px;
+}
+.story-description {
+  clear: both;
+  font-style: italic;
+  font-size: 26px;
+  border-bottom:1px solid #CCC;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.story-element {
+  clear: both;
+  padding: 20px;
+  padding-bottom: 40px;
+  margin: 10px;
+  width: 550px;
+  margin-left: 90px;
+}
+.story-element.source-storify {
+  margin-left: 0px;
+  border-left: 1px solid #ccc;
+  margin-top: 20px;
+}
+.avatar {
+  border: 4px solid #FFF;
+  -moz-box-shadow: 0px 1px 3px #ccc;
+  -webkit-box-shadow: 0px 1px 3px #ccc;
+  box-shadow: 0px 1px 3px #ccc;
+}
+.permalink img{
+  display: none;
+}
+.source-twitter img {
+  margin-bottom: 10px;
+}
+.source-twitter .text {
+  background: url("quote.png") no-repeat;
+  padding-left: 40px;
+}
+.source-youtube .avatar, .source-xml .avatar, .source-Feedburner .avatar, .source-google .avatar {
+  position:relative;
+  top: 20px;
+  border: none;
+  -moz-box-shadow: 0px 0px 0px #f6f6f6;
+  -webkit-box-shadow: 0px 0px 0px #f6f6f6;
+  box-shadow: 0px 0px 0px #f6f6f6;
+}
+.text {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.title {
+  font-size: 14px;
+  font-style: italic;
+}
+*{margin:0;padding:0}
+a{color:#0074b7;text-decoration:none}
+h1{font-size:2.2em}
