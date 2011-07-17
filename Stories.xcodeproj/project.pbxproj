@@ -15,6 +15,8 @@
 		095269C313D337820049BEE0 /* SearchAppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 095269BF13D337820049BEE0 /* SearchAppLogo.png */; };
 		095269C413D337820049BEE0 /* SearchButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 095269C013D337820049BEE0 /* SearchButton.png */; };
 		095269C713D340A10049BEE0 /* SearchBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 095269C613D340A10049BEE0 /* SearchBackground.png */; };
+		095269CA13D343C30049BEE0 /* StoriesBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269C913D343C30049BEE0 /* StoriesBrowserView.m */; };
+		095269CD13D349900049BEE0 /* StoryThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269CC13D349900049BEE0 /* StoryThumbView.m */; };
 		0970C75713D231F700442524 /* StoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970C75613D231F700442524 /* StoriesViewController.m */; };
 		09872CE213D1F897003FB29A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE113D1F897003FB29A /* UIKit.framework */; };
 		09872CE413D1F897003FB29A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE313D1F897003FB29A /* Foundation.framework */; };
@@ -57,6 +59,10 @@
 		095269BF13D337820049BEE0 /* SearchAppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchAppLogo.png; sourceTree = "<group>"; };
 		095269C013D337820049BEE0 /* SearchButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchButton.png; sourceTree = "<group>"; };
 		095269C613D340A10049BEE0 /* SearchBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchBackground.png; sourceTree = "<group>"; };
+		095269C813D343C30049BEE0 /* StoriesBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesBrowserView.h; sourceTree = "<group>"; };
+		095269C913D343C30049BEE0 /* StoriesBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesBrowserView.m; sourceTree = "<group>"; };
+		095269CB13D349900049BEE0 /* StoryThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryThumbView.h; sourceTree = "<group>"; };
+		095269CC13D349900049BEE0 /* StoryThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryThumbView.m; sourceTree = "<group>"; };
 		0970C75513D231F700442524 /* StoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesViewController.h; sourceTree = "<group>"; };
 		0970C75613D231F700442524 /* StoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesViewController.m; sourceTree = "<group>"; };
 		09872CDD13D1F897003FB29A /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +196,10 @@
 				092738FA13D2181E00316B1C /* ApplicationCore.m */,
 				0970C75513D231F700442524 /* StoriesViewController.h */,
 				0970C75613D231F700442524 /* StoriesViewController.m */,
+				095269C813D343C30049BEE0 /* StoriesBrowserView.h */,
+				095269C913D343C30049BEE0 /* StoriesBrowserView.m */,
+				095269CB13D349900049BEE0 /* StoryThumbView.h */,
+				095269CC13D349900049BEE0 /* StoryThumbView.m */,
 				A6A309CE13D1FFF000217831 /* Models */,
 				09872CF013D1F897003FB29A /* StoriesAppDelegate.h */,
 				09872CF113D1F898003FB29A /* StoriesAppDelegate.m */,
@@ -383,6 +393,8 @@
 				0970C75713D231F700442524 /* StoriesViewController.m in Sources */,
 				A6A309E613D21F5800217831 /* StoryView.m in Sources */,
 				A6A309E913D22FEE00217831 /* Image.m in Sources */,
+				095269CA13D343C30049BEE0 /* StoriesBrowserView.m in Sources */,
+				095269CD13D349900049BEE0 /* StoryThumbView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

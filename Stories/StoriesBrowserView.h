@@ -16,18 +16,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class StoriesBrowserView;
 
-@interface StoriesViewController : UIViewController {
+@interface StoriesBrowserView : UIView {
     NSArray *_stories;
-    UIImageView *_backgroundView;
-    StoriesBrowserView *_storiesBrowserView;
+    UIScrollView *_scrollView;
 }
 
 @property (nonatomic, retain) NSArray *stories;
-@property (nonatomic, retain) UIImageView *backgroundView;
-@property (nonatomic, retain) StoriesBrowserView *storiesBrowserView;
+@property (nonatomic, retain) UIScrollView *scrollView;
 
-- (id)initWithStories:(NSArray *)stories;
+- (id)initWithFrame:(CGRect)frame stories:(NSArray *)stories;
 
 @end

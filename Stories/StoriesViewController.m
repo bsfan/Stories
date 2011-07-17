@@ -15,11 +15,13 @@
 //
 
 #import "StoriesViewController.h"
-
+#import "StoriesBrowserView.h"
 
 @implementation StoriesViewController
 
 @synthesize stories=_stories;
+@synthesize backgroundView=_backgroundView;
+@synthesize storiesBrowserView=_storiesBrowserView;
 
 - (id)initWithStories:(NSArray *)stories {
     self = [super init];
@@ -37,6 +39,18 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
+//    _backgroundView = [[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    [_backgroundView setImage:[UIImage imageNamed:@"Background"]];
+//    [self setView:_backgroundView];
+    
+    UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    [view setBackgroundColor:[UIColor redColor]];
+    [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]]];
+    [self setView:view];
+    
+    CGRect storiesBrowserViewFrame = CGRectMake(0.0, 0.0, 1024.0, 165.0);
+    _storiesBrowserView = [[StoriesBrowserView alloc] initWithFrame:storiesBrowserViewFrame stories:_stories];
+    [[self view] addSubview:_storiesBrowserView];
 }
 
 - (void)viewDidLoad {
@@ -45,6 +59,9 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    
+    _backgroundView = nil;
+    _storiesBrowserView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,6 +90,9 @@
 #pragma mark -
 
 - (void)dealloc {
+    [_backgroundView release];
+    [_storiesBrowserView release];
+    
     [super dealloc];
 }
 
