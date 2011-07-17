@@ -4,7 +4,6 @@ html {
 }
 body {
   padding: 20px;
-  width: 1024px;
 }
 .story {
   margin-top: 0;
@@ -12,7 +11,7 @@ body {
 h1 {
   background: #627ea2;
   display: inline-table;
-  width: 80px;
+  width: 300px;
   padding: 10px;
   color: #f6f6f6;
   float: left;
