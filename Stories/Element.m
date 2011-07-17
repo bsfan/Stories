@@ -52,7 +52,8 @@
         m_dictionary = [dictionary retain];
         m_author = [[[Author alloc] initWithDictionary:[dictionary objectForKey:@"author"]] retain];
         
-        if ([dictionary objectForKey:@"image"])
+        NSString* image = [dictionary objectForKey:@"image"];
+        if (image && [image isKindOfClass:[NSDictionary class]])
             m_image = [[[Image alloc] initWithDictionary:[dictionary objectForKey:@"image"]] retain];
         
         [self generateHtml];
