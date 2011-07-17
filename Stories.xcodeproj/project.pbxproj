@@ -21,6 +21,7 @@
 		095269DC13D3544A0049BEE0 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269D913D3544A0049BEE0 /* EGOImageLoadConnection.m */; };
 		095269DD13D3544A0049BEE0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269DB13D3544A0049BEE0 /* EGOImageLoader.m */; };
 		095269E113D354D20049BEE0 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269E013D354D20049BEE0 /* EGOCache.m */; };
+		095269E513D361C90049BEE0 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 095269E413D361C90049BEE0 /* placeholder.png */; };
 		0970C75713D231F700442524 /* StoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970C75613D231F700442524 /* StoriesViewController.m */; };
 		09872CE213D1F897003FB29A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE113D1F897003FB29A /* UIKit.framework */; };
 		09872CE413D1F897003FB29A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE313D1F897003FB29A /* Foundation.framework */; };
@@ -75,6 +76,7 @@
 		095269DB13D3544A0049BEE0 /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
 		095269DF13D354D20049BEE0 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
 		095269E013D354D20049BEE0 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
+		095269E413D361C90049BEE0 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		0970C75513D231F700442524 /* StoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesViewController.h; sourceTree = "<group>"; };
 		0970C75613D231F700442524 /* StoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesViewController.m; sourceTree = "<group>"; };
 		09872CDD13D1F897003FB29A /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 		095269BC13D337820049BEE0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				095269E413D361C90049BEE0 /* placeholder.png */,
 				095269C613D340A10049BEE0 /* SearchBackground.png */,
 				095269BD13D337820049BEE0 /* Background.png */,
 				095269BE13D337820049BEE0 /* Magnifier.png */,
@@ -406,6 +409,7 @@
 				095269C413D337820049BEE0 /* SearchButton.png in Resources */,
 				095269C713D340A10049BEE0 /* SearchBackground.png in Resources */,
 				A6E24EEA13D34DB800F67813 /* base.css in Resources */,
+				095269E513D361C90049BEE0 /* placeholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
