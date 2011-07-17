@@ -70,7 +70,7 @@
 {
     NSMutableArray* tags = [NSMutableArray array];
     
-    [tags addObject:[NSString stringWithFormat:@"<p class=\"story-element source-%@\">", self.source]];
+    [tags addObject:[NSString stringWithFormat:@"<div class=\"story-element source-%@\">", self.source]];
     
     if ([self.source isEqualToString:@"storify"])
     {
@@ -146,7 +146,7 @@
         
         [tags addObject:@"</div>"];	
         
-        [tags addObject:@"</p>"];
+        [tags addObject:@"</div>"];
     }
     
     m_html = [tags componentsJoinedByString:@"\n"];
