@@ -109,19 +109,15 @@
             if (200 == [request responseStatusCode]) {
                 if ([self storyView]) {
                     [_storyView removeFromSuperview];
-                    [_storyView release];
                 }
                 NSString *response = [request responseString];
-                
-//                NSLog(@"%@", response);
                 NSDictionary *responseDictionary = [response objectFromJSONString];
                 Story *fullStory = [[Story alloc] initWithDictionary:responseDictionary];
                 
-//                CGRect storyViewFrame = CGRectMake(0.0, 165.0, 1024.0, 603.0);
-                CGRect storyViewFrame = CGRectMake(0.0, 165.0, 1024.0, 603.0);
+                CGRect storyViewFrame = CGRectMake(0.0, 82.0, 1024.0, 540.0);
                 [self setStoryView:[[StoryView alloc] initWithFrame:storyViewFrame story:fullStory]];
-                
                 [[self view] addSubview:[self storyView]];
+                [[self view] sendSubviewToBack:_storyView];
             }
             
         }];
