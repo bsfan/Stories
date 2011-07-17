@@ -49,7 +49,7 @@
 
 - (void)generateHtml
 {
-    m_html = [[NSString stringWithFormat:@"<a href=\"%@\"><img src=\"%@\"/></a>", self.hrefUrl, self.srcUrl] retain];
+    m_html = [[NSString stringWithFormat:@"<a href=\"%@\"><img src=\"%@\" alt=\"\"/></a>", [[NSString stringWithFormat:@"%@", self.hrefUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [[NSString stringWithFormat:@"%@", self.srcUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] retain];
 }
 
 //////////////////////////////////////////////////////////////

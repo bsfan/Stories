@@ -84,19 +84,29 @@
 {
     NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateFormat:@"MMMM d, y 'at' h:m"];
-    
+        
     NSMutableArray* tags = [NSMutableArray array];
-    
+
+    [tags addObject:@"<!DOCTYPE html>"];
     [tags addObject:@"<html>"];
     [tags addObject:@"<head>"];
+    
     [tags addObject:[NSString stringWithFormat:@"<title>%@</title>", self.title]];
+    [tags addObject:@"<meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\">"];
+    
+    [tags addObject:@"<style TYPE=\"text/css\">"];
+    [tags addObject:@"<!--"];
+    [tags addObject:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base" ofType:@"css"] encoding:NSUTF8StringEncoding error:nil]];
+    [tags addObject:@"-->"];
+    [tags addObject:@"</style>"];
+
     [tags addObject:@"</head>"];
     [tags addObject:@"<body>"];
         
     [tags addObject:@"<div class=\"story\">"];
     
     [tags addObject:[NSString stringWithFormat:@"<h1>%@</h1>", self.title]];
-    [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\"/>By <a href=\"%@\">%@</a>, published on %@</h2>", self.author.avatarUrl, self.author.permalinkUrl, self.author.name, [dateFormatter stringFromDate:self.publishedAt]]];
+    [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\" alt=\"\"/>By <a href=\"%@\">%@</a>, published on %@</h2>", [[NSString stringWithFormat:@"%@", self.author.avatarUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [[NSString stringWithFormat:@"%@", self.author.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.author.name, [dateFormatter stringFromDate:self.publishedAt]]];
 
     if (self.description)
         [tags addObject:[NSString stringWithFormat:@"<p class=\"story-description\">%@</p>", self.description]];

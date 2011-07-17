@@ -124,7 +124,7 @@
     {
         // Title
         [tags addObject:@"<div class=\"title\">"];
-        [tags addObject:[NSString stringWithFormat:@"<a href=\"%@\">%@</a>", self.permalinkUrl, self.title]];
+        [tags addObject:[NSString stringWithFormat:@"<a href=\"%@\">%@</a>", [[NSString stringWithFormat:@"%@", self.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.title]];
         [tags addObject:@"</div>"];
         
         // Text
@@ -146,7 +146,7 @@
         
         // Title
         [tags addObject:@"<div class=\"title\">"];
-        [tags addObject:[NSString stringWithFormat:@"<a href=\"%@\">Photo by %@</a>", self.permalinkUrl, self.title]];
+        [tags addObject:[NSString stringWithFormat:@"<a href=\"%@\">Photo by %@</a>", [[NSString stringWithFormat:@"%@", self.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.title]];
         [tags addObject:@"</div>"];
     }
     else
@@ -160,14 +160,14 @@
         [tags addObject:@"<div class=\"author\">"];
         
         if (self.author.permalinkUrl)
-            [tags addObject:[NSString stringWithFormat:@"<span class=\"name\"><a href=\"%@\">%@</a></span>", self.author.permalinkUrl, self.author.name]];
+            [tags addObject:[NSString stringWithFormat:@"<span class=\"name\"><a href=\"%@\">%@</a></span>", [[NSString stringWithFormat:@"%@", self.author.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.author.name]];
         else
             [tags addObject:[NSString stringWithFormat:@"<span class=\"name\">%@</span>", self.author.name]];
         
-        [tags addObject:[NSString stringWithFormat:@"<span class=\"permalink\"><img src=\"%@\"/><a href=\"%@\">%@</a></span>", self.favIconUrl, self.permalinkUrl, [dateFormatter stringFromDate:self.createdAt]]];
+        [tags addObject:[NSString stringWithFormat:@"<span class=\"permalink\"><img src=\"%@\" alt=\"\"/><a href=\"%@\">%@</a></span>", [[NSString stringWithFormat:@"%@", self.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.favIconUrl, [dateFormatter stringFromDate:self.createdAt]]];
         
         if (self.author.avatarUrl)
-            [tags addObject:[NSString stringWithFormat:@"<img class=\"avatar\" src=\"%@\"/>", self.author.avatarUrl]];
+            [tags addObject:[NSString stringWithFormat:@"<img class=\"avatar\" src=\"%@\" alt=\"\"/>", [[NSString stringWithFormat:@"%@", self.author.avatarUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         
         [tags addObject:@"</div>"];	
     }    
