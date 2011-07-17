@@ -25,17 +25,27 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"SearchBackground"]]];
+        
         _searchTextField = [[UITextField alloc] init];
         [_searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
         [_searchTextField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         [_searchTextField setFont:[UIFont systemFontOfSize:16.0]];
         [_searchTextField setPlaceholder:@"Enter a topic"];
-        //TODO: Add the leftView
+        
+        UIImageView *magnifierImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Magnifier"]];
+        [_searchTextField setLeftView:magnifierImageView];
+        [_searchTextField setLeftViewMode:UITextFieldViewModeAlways];
+        [magnifierImageView release];
+        
         [_searchTextField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         [_searchTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
+        [_searchTextField setReturnKeyType:UIReturnKeySearch];
         [self addSubview:_searchTextField];
         
-        _searchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_searchButton setImage:[UIImage imageNamed:@"SearchButton"] forState:UIControlStateNormal];
         [_searchButton setTitle:@"Search" forState:UIControlStateNormal];
         [self addSubview:_searchButton];
     }
@@ -43,10 +53,10 @@
 }
 
 - (void)layoutSubviews {
-    CGRect searchTextFieldFrame = CGRectMake(50.0, 50.0, 150.0, 31.0);
+    CGRect searchTextFieldFrame = CGRectMake(280.0, 490.0, 335.0, 31.0);
     [_searchTextField setFrame:searchTextFieldFrame];
     
-    CGRect searchButtonFrame = CGRectMake(500.0, 500.0, 140.0, 45.0);
+    CGRect searchButtonFrame = CGRectMake(630.0, 484.0, 140.0, 45.0);
     [_searchButton setFrame:searchButtonFrame];
 }
 
