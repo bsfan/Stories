@@ -16,22 +16,44 @@
 
 #import "StoryThumbView.h"
 #import "Story.h"
+#import "Author.h"
+#import "EGOImageView.h"
 
 
 @implementation StoryThumbView
 
+@synthesize story=_story;
+@synthesize imageView=_imageView;
+@synthesize titleLabel=_titleLabel;
+
 - (id)initWithFrame:(CGRect)frame story:(Story *)story {
     self = [super initWithFrame:frame];
     if (self) {
-        //TODO: add image from the web!
+        [self setStory:story];
         [self setBackgroundColor:[UIColor blackColor]];
+        
+        _imageView = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"placeholder"]];
+        
+        NSURL *imageURL = nil;
+        if ([story thumbnailUrl]) {
+            imageURL = [story thumbnailUrl];
+        } else {
+            imageURL = [[story author] avatarUrl];
+        }
+        [_imageView setImageURL:imageURL];
+        [self addSubview:_imageView];
         
         _titleLabel = [[UILabel alloc] init];
         [_titleLabel setFont:[UIFont systemFontOfSize:13.0]];
         [_titleLabel setNumberOfLines:2];
         [_titleLabel setLineBreakMode:UILineBreakModeWordWrap];
         [_titleLabel setText:[story title]];
+        [_titleLabel setAlpha:0.8];
         [self addSubview:_titleLabel];
+    
+        UITapGestureRecognizer *tapGestureRegognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        [self addGestureRecognizer:tapGestureRegognizer];
+        [tapGestureRegognizer release];
     }
     return self;
 }
@@ -42,9 +64,20 @@
 }
 
 
+- (void)handleTapGesture:(UIGestureRecognizer *)sender {
+    NSLog(@"permalink: %@", [_story permalinkJsonUrl]);
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [_story permalinkJsonUrl] , @"PermalinkURL", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectStory" object:nil userInfo:userInfo];
+}
+
+
 #pragma mark -
 
 - (void)dealloc {
+    [_imageView release];
+    [_titleLabel release];
+    
     [super dealloc];
 }
 

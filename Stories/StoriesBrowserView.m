@@ -30,7 +30,7 @@
         [self setStories:stories];
         
         _scrollView = [[UIScrollView alloc] initWithFrame:[self frame]];
-        [_scrollView setBackgroundColor:[UIColor yellowColor]];
+        [_scrollView setBackgroundColor:[UIColor blackColor]];
         
         CGFloat thumbnailSpacing = 145.0;
         [_scrollView setContentSize:CGSizeMake(145 * [_stories count] + 30, 165.0)];

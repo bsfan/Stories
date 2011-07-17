@@ -17,14 +17,16 @@
 #import <UIKit/UIKit.h>
 
 
-@class Story;
+@class Story, EGOImageView;
 
 @interface StoryThumbView : UIView {
-    UIImageView *_thumbailImageView;
+    Story *_story;
+    EGOImageView *_imageView;
     UILabel *_titleLabel;
 }
 
-@property (nonatomic, retain) UIImageView *thumbnailImageView;
+@property (nonatomic, retain) Story *story;
+@property (nonatomic, retain) EGOImageView *imageView;
 @property (nonatomic, retain) UILabel *titleLabel;
 
 - (id)initWithFrame:(CGRect)frame story:(Story *)story;
