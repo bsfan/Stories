@@ -173,7 +173,7 @@
         else
             [tags addObject:[NSString stringWithFormat:@"<span class=\"name\">%@</span>", self.author.name]];
         
-        [tags addObject:[NSString stringWithFormat:@"<span class=\"permalink\"><img src=\"%@\" alt=\"\"/><a href=\"%@\">%@</a></span>", [[NSString stringWithFormat:@"%@", self.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.favIconUrl, [dateFormatter stringFromDate:self.createdAt]]];
+        [tags addObject:[NSString stringWithFormat:@"<span class=\"permalink\"><img src=\"%@\" alt=\"\"/><a href=\"%@\">%@</a></span>", [[NSString stringWithFormat:@"%@", self.favIconUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.permalinkUrl, [dateFormatter stringFromDate:self.createdAt]]];
         
         if (self.author.avatarUrl)
             [tags addObject:[NSString stringWithFormat:@"<img class=\"avatar\" src=\"%@\" alt=\"\"/>", [[NSString stringWithFormat:@"%@", self.author.avatarUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
