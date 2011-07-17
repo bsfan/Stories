@@ -117,6 +117,7 @@
                 }
                 
                 StoriesViewController *storiesViewController = [[StoriesViewController alloc] initWithStories:stories];
+                [storiesViewController setTitle:query];
                 [[self navigationController] pushViewController:storiesViewController animated:YES];
                 [storiesViewController release];
                 
@@ -134,10 +135,10 @@
 
 #pragma mark - UITextFieldDelegate Protocol
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self performSearch:textField];
-    return YES;
-}
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    [self performSearch:textField];
+//    return YES;
+//}
 
 
 #pragma mark -
