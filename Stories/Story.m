@@ -80,7 +80,7 @@
     [tags addObject:@"<div class=\"story\">"];
     
     [tags addObject:[NSString stringWithFormat:@"<h1>%@</h1>", self.title]];
-    [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\"/>By <a href=\"%@\">%@</a></h2>, published at %@", self.author.avatarUrl, self.author.permalinkUrl, self.author.name, self.publishedAt]];
+    [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\"/>By <a href=\"%@\">%@</a>, published at %@</h2>", self.author.avatarUrl, self.author.permalinkUrl, self.author.name, self.publishedAt]];
     
     for (Element* element in m_elements)
         [tags addObject:element.html];

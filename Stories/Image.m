@@ -17,7 +17,7 @@
 @synthesize srcUrl;
 @synthesize hrefUrl;
 
-@synthesize html;
+@synthesize html = m_html;
 
 - (id)init
 {
