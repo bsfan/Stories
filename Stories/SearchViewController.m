@@ -43,7 +43,6 @@
 - (void)loadView {
     _searchView = [[SearchView alloc] initWithFrame:CGRectZero];
     [_searchView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
-    [_searchView setBackgroundColor:[UIColor redColor]];
     [[_searchView searchButton] addTarget:self action:@selector(performSearch:) forControlEvents:UIControlEventTouchUpInside];
     
     [self setView:_searchView];
