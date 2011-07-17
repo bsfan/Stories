@@ -18,7 +18,7 @@
 
 @class Story;
 
-@interface StoryView : UIView
+@interface StoryView : UIView <UIWebViewDelegate>
 {
     Story* m_story;
     UIWebView* m_webView;
