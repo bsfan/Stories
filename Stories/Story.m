@@ -99,7 +99,7 @@
     [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\"/>By <a href=\"%@\">%@</a>, published on %@</h2>", self.author.avatarUrl, self.author.permalinkUrl, self.author.name, [dateFormatter stringFromDate:self.publishedAt]]];
 
     if (self.description)
-        [tags addObject:[NSString stringWithFormat:@"<p class\"story-description\">%@</p>", self.description]];
+        [tags addObject:[NSString stringWithFormat:@"<p class=\"story-description\">%@</p>", self.description]];
 
     for (Element* element in m_elements)
     {
