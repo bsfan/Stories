@@ -43,6 +43,7 @@
 		09872D2E13D1FB24003FB29A /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 09872D1F13D1FB24003FB29A /* ASINetworkQueue.m */; };
 		09872D2F13D1FB24003FB29A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09872D2313D1FB24003FB29A /* JSONKit.m */; };
 		09872D3013D1FB24003FB29A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 09872D2613D1FB24003FB29A /* Reachability.m */; };
+		09FA91EF13D36A5100B59B6B /* StoryBrowserBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FA91EE13D36A5100B59B6B /* StoryBrowserBackground.png */; };
 		A6A309D213D2001600217831 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D113D2001600217831 /* Author.m */; };
 		A6A309D513D2033600217831 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D413D2033600217831 /* Story.m */; };
 		A6A309D813D20EAA00217831 /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D713D20EAA00217831 /* Element.m */; };
@@ -117,6 +118,7 @@
 		09872D2313D1FB24003FB29A /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		09872D2513D1FB24003FB29A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		09872D2613D1FB24003FB29A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		09FA91EE13D36A5100B59B6B /* StoryBrowserBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoryBrowserBackground.png; sourceTree = "<group>"; };
 		A6A309D013D2001600217831 /* Author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
 		A6A309D113D2001600217831 /* Author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Author.m; sourceTree = "<group>"; };
 		A6A309D313D2033600217831 /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		095269BC13D337820049BEE0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				09FA91EE13D36A5100B59B6B /* StoryBrowserBackground.png */,
 				095269E413D361C90049BEE0 /* placeholder.png */,
 				095269C613D340A10049BEE0 /* SearchBackground.png */,
 				095269BD13D337820049BEE0 /* Background.png */,
@@ -410,6 +413,7 @@
 				095269C713D340A10049BEE0 /* SearchBackground.png in Resources */,
 				A6E24EEA13D34DB800F67813 /* base.css in Resources */,
 				095269E513D361C90049BEE0 /* placeholder.png in Resources */,
+				09FA91EF13D36A5100B59B6B /* StoryBrowserBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
