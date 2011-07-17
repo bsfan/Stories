@@ -16,17 +16,24 @@
 
 #import "StoriesViewController.h"
 #import "StoriesBrowserView.h"
+#import "ASIHTTPRequest.h"
+#import "JSONKit.h"
+#import "StoryView.h"
+#import "Story.h"
+
 
 @implementation StoriesViewController
 
 @synthesize stories=_stories;
 @synthesize backgroundView=_backgroundView;
 @synthesize storiesBrowserView=_storiesBrowserView;
+@synthesize storyView=_storyView;
 
 - (id)initWithStories:(NSArray *)stories {
     self = [super init];
     if (self) {
         [self setStories:stories];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:@"DidSelectStory" object:nil];
     }
     return self;
 }
@@ -84,6 +91,42 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));
+}
+
+
+- (void)didReceiveNotification:(NSNotification *)notification {
+    if ([[notification name] isEqualToString:@"DidSelectStory"]) {
+        NSDictionary *userInfo = [notification userInfo];
+        NSURL *url = [userInfo objectForKey:@"PermalinkURL"];
+        
+        NSLog(@"permalink url: %@", url);
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+        [request setResponseEncoding:NSUTF8StringEncoding];
+        [request setCompletionBlock:^(void) {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            if (200 == [request responseStatusCode]) {
+                if ([self storyView]) {
+                    [_storyView removeFromSuperview];
+                    [_storyView release];
+                }
+                NSString *response = [request responseString];
+                
+//                NSLog(@"%@", response);
+                NSDictionary *responseDictionary = [response objectFromJSONString];
+                Story *fullStory = [[Story alloc] initWithDictionary:responseDictionary];
+                
+//                CGRect storyViewFrame = CGRectMake(0.0, 165.0, 1024.0, 603.0);
+                CGRect storyViewFrame = CGRectMake(0.0, 165.0, 1024.0, 603.0);
+                [self setStoryView:[[StoryView alloc] initWithFrame:storyViewFrame story:fullStory]];
+                
+                [[self view] addSubview:[self storyView]];
+            }
+            
+        }];
+        [request startAsynchronous];
+    }
 }
 
 
