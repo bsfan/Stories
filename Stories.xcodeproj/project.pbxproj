@@ -22,6 +22,7 @@
 		095269DD13D3544A0049BEE0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269DB13D3544A0049BEE0 /* EGOImageLoader.m */; };
 		095269E113D354D20049BEE0 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 095269E013D354D20049BEE0 /* EGOCache.m */; };
 		095269E513D361C90049BEE0 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 095269E413D361C90049BEE0 /* placeholder.png */; };
+		096C3E5C13D44DF800355751 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 096C3E5B13D44DF800355751 /* Icon-72.png */; };
 		0970C75713D231F700442524 /* StoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0970C75613D231F700442524 /* StoriesViewController.m */; };
 		09872CE213D1F897003FB29A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE113D1F897003FB29A /* UIKit.framework */; };
 		09872CE413D1F897003FB29A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09872CE313D1F897003FB29A /* Foundation.framework */; };
@@ -43,6 +44,7 @@
 		09872D2E13D1FB24003FB29A /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 09872D1F13D1FB24003FB29A /* ASINetworkQueue.m */; };
 		09872D2F13D1FB24003FB29A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09872D2313D1FB24003FB29A /* JSONKit.m */; };
 		09872D3013D1FB24003FB29A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 09872D2613D1FB24003FB29A /* Reachability.m */; };
+		09BE00EA13D46DAD003E3AB5 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 09BE00E913D46DAD003E3AB5 /* iTunesArtwork */; };
 		09FA91EF13D36A5100B59B6B /* StoryBrowserBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FA91EE13D36A5100B59B6B /* StoryBrowserBackground.png */; };
 		A6A309D213D2001600217831 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D113D2001600217831 /* Author.m */; };
 		A6A309D513D2033600217831 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D413D2033600217831 /* Story.m */; };
@@ -78,6 +80,7 @@
 		095269DF13D354D20049BEE0 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
 		095269E013D354D20049BEE0 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		095269E413D361C90049BEE0 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		096C3E5B13D44DF800355751 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
 		0970C75513D231F700442524 /* StoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesViewController.h; sourceTree = "<group>"; };
 		0970C75613D231F700442524 /* StoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesViewController.m; sourceTree = "<group>"; };
 		09872CDD13D1F897003FB29A /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +121,7 @@
 		09872D2313D1FB24003FB29A /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		09872D2513D1FB24003FB29A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		09872D2613D1FB24003FB29A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		09BE00E913D46DAD003E3AB5 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		09FA91EE13D36A5100B59B6B /* StoryBrowserBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoryBrowserBackground.png; sourceTree = "<group>"; };
 		A6A309D013D2001600217831 /* Author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
 		A6A309D113D2001600217831 /* Author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Author.m; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 		09872CE813D1F897003FB29A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				09BE00E913D46DAD003E3AB5 /* iTunesArtwork */,
+				096C3E5B13D44DF800355751 /* Icon-72.png */,
 				A6E24EE913D34DB800F67813 /* base.css */,
 				A6C9876813D33F0B0045F676 /* winning.json */,
 				09872CE913D1F897003FB29A /* Stories-Info.plist */,
@@ -414,6 +420,8 @@
 				A6E24EEA13D34DB800F67813 /* base.css in Resources */,
 				095269E513D361C90049BEE0 /* placeholder.png in Resources */,
 				09FA91EF13D36A5100B59B6B /* StoryBrowserBackground.png in Resources */,
+				096C3E5C13D44DF800355751 /* Icon-72.png in Resources */,
+				09BE00EA13D46DAD003E3AB5 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
