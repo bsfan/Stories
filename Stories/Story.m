@@ -88,9 +88,54 @@
 }
 
 
-- (NSString *)HTML {
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm"];
+//////////////////////////////////////////////////////////////
+#pragma mark - Private methods
+//////////////////////////////////////////////////////////////
+
++ (NSString *)formattedDateRelativeToNow:(NSDate *)date
+{
+    NSDateFormatter *mdf = [[NSDateFormatter alloc] init];
+    [mdf setDateFormat:@"yyyy-MM-dd"];
+    NSDate *midnight = [mdf dateFromString:[mdf stringFromDate:date]];
+    [mdf release];
+    
+    NSInteger dayDiff = (int)[midnight timeIntervalSinceNow] / (60*60*24);
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease]; 
+    
+    if(dayDiff == 0)
+        [dateFormatter setDateFormat:@"'Today, 'h':'mm aaa"];
+    else if(dayDiff == -1)
+        [dateFormatter setDateFormat:@"'Yesterday, 'h':'mm aaa"];
+    else if(dayDiff == -2)
+        [dateFormatter setDateFormat:@"MMMM d', Two days ago'"];
+    else if(dayDiff > -7 && dayDiff <= -2)
+        [dateFormatter setDateFormat:@"MMMM d', This week'"];
+    else if(dayDiff > -14 && dayDiff <= -7)
+        [dateFormatter setDateFormat:@"MMMM d'; Last week'"];
+    else if(dayDiff >= -60 && dayDiff <= -30)
+        [dateFormatter setDateFormat:@"MMMM d'; Last month'"];
+    else if(dayDiff >= -90 && dayDiff <= -60)
+        [dateFormatter setDateFormat:@"MMMM d'; Within last three months'"];
+    else if(dayDiff >= -180 && dayDiff <= -90)
+        [dateFormatter setDateFormat:@"MMMM d'; Within last six months'"];
+    else if(dayDiff >= -365 && dayDiff <= -180)
+        [dateFormatter setDateFormat:@"MMMM d, YYYY'; Within this year'"];
+    else if(dayDiff < -365)
+        [dateFormatter setDateFormat:@"MMMM d, YYYY'; A long time ago'"];
+    
+    return [dateFormatter stringFromDate:date];
+} 
+
+- (void)generateHtml
+{
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:mm aaa"];
+        
+    NSMutableArray* tags = [NSMutableArray array];
+
+    [tags addObject:@"<!DOCTYPE html>"];
+    [tags addObject:@"<html>"];
+    [tags addObject:@"<head>"];
     
     NSMutableString *output = [[NSMutableString alloc] init];
     
@@ -122,19 +167,55 @@
 
 #pragma mark -
 
-- (void)dealloc {
-    [_elements release];
-    [_topics release];
-    [_thumbnailURL release];
-    [_description release];
-    [_title release];
-    [_shortURL release];
-    [_author release];
-    [_publicationDate release];
-    [_permalinkJSONURL release];
-    [_permalinkURL release];
-    
-    [super dealloc];
+- (NSURL *)permalinkUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"permalink"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
+}
+
+- (NSURL *)permalinkJsonUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"permalink"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:[url stringByAppendingString:@".json"]];
+    else
+        return nil;
+}
+
+- (NSDate *)publishedAt
+{
+    return [NSDate dateWithTimeIntervalSince1970:[[m_dictionary objectForKey:@"published_at"] integerValue]];
+}
+
+- (NSURL *)shortUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"shorturl"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
+}
+
+- (NSString *)title
+{
+    return [m_dictionary objectForKey:@"title"];
+}
+
+- (NSString *)description
+{
+    return [m_dictionary objectForKey:@"description"];
+}
+
+- (NSURL *)thumbnailUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"thumbnail"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
 }
 
 @end

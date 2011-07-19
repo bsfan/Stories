@@ -83,4 +83,42 @@
     [super dealloc];
 }
 
+- (NSString *)name
+{
+    return [m_dictionary objectForKey:@"name"];
+}
+
+- (NSURL *)avatarUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"avatar"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
+}
+
+- (NSString *)description
+{
+    return [m_dictionary objectForKey:@"description"];
+}
+
+- (NSString *)location
+{
+    return [m_dictionary objectForKey:@"location"];
+}
+
+- (NSString *)website
+{
+    return [m_dictionary objectForKey:@"website"];
+}
+
+- (NSURL *)permalinkUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"permalink"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
+}
+
 @end

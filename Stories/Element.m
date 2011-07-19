@@ -94,9 +94,16 @@
 }
 
 
-- (NSString *)HTML {
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm"];
+//////////////////////////////////////////////////////////////
+#pragma mark - Private methods
+//////////////////////////////////////////////////////////////
+
+- (void)generateHtml
+{
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:mm aaa"];
+
+    NSMutableArray* tags = [NSMutableArray array];
     
     NSMutableString *output = [[NSMutableString alloc] init];
     
@@ -190,6 +197,63 @@
     [_source release];
     
     [super dealloc];
+}
+
+- (NSURL *)permalinkUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"permalink"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
+}
+
+- (NSString *)title
+{
+    return [m_dictionary objectForKey:@"title"];
+}
+
+- (NSString *)description
+{
+    return [m_dictionary objectForKey:@"description"];
+}
+
+- (NSURL *)thumbnailUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"thumbnail"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
+}
+
+- (NSURL *)favIconUrl
+{
+    NSString* url = [m_dictionary objectForKey:@"favicon"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
+}
+
+- (NSDate *)createdAt
+{
+    return [NSDate dateWithTimeIntervalSince1970:[[m_dictionary objectForKey:@"created_at"] integerValue]];
+}
+
+- (NSDate *)addedAt
+{
+    return [NSDate dateWithTimeIntervalSince1970:[[m_dictionary objectForKey:@"added_at"] integerValue]];
+}
+
+- (NSString *)oEmbedHtml
+{
+    NSObject* object = [m_dictionary objectForKey:@"oembed"];
+    if ([object isKindOfClass:[NSDictionary class]])
+        return [(NSDictionary *) object objectForKey:@"html"];
+    else if ([object isKindOfClass:[NSString class]])
+        return (NSString *) object;
+    else return nil;
 }
 
 @end

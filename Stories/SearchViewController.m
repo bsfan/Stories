@@ -94,7 +94,7 @@
     }
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kAPITopicsURL, [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kAPITopicsURL, [[query lowercaseString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setResponseEncoding:NSUTF8StringEncoding];
     [request setCompletionBlock:^(void) {
