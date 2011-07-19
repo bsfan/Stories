@@ -63,7 +63,11 @@
 
 - (NSURL *)avatarUrl
 {
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"avatar"]];
+    NSString* url = [m_dictionary objectForKey:@"avatar"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
 }
 
 - (NSString *)description
@@ -83,7 +87,11 @@
 
 - (NSURL *)permalinkUrl
 {
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"permalink"]];
+    NSString* url = [m_dictionary objectForKey:@"permalink"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
 }
 
 @end

@@ -78,7 +78,7 @@
 - (void)generateHtml
 {
     NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:m"];
+    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:mm aaa"];
 
     NSMutableArray* tags = [NSMutableArray array];
     
@@ -199,7 +199,11 @@
 
 - (NSURL *)permalinkUrl
 {
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"permalink"]];
+    NSString* url = [m_dictionary objectForKey:@"permalink"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
 }
 
 - (NSString *)title
@@ -214,12 +218,20 @@
 
 - (NSURL *)thumbnailUrl
 {
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"thumbnail"]];
+    NSString* url = [m_dictionary objectForKey:@"thumbnail"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
 }
 
 - (NSURL *)favIconUrl
 {
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"favicon"]];
+    NSString* url = [m_dictionary objectForKey:@"favicon"];
+    if (url && [url isKindOfClass:[NSNull class]] == NO)
+        return [NSURL URLWithString:url];
+    else
+        return nil;
 }
 
 - (NSDate *)createdAt
