@@ -19,6 +19,11 @@
 #import "Element.h"
 
 
+@interface Story ()
+- (NSString *)formattedDateRelativeToNow:(NSDate *)date;
+@end
+
+
 @implementation Story
 
 @synthesize permalinkURL=_permalinkURL;
@@ -73,9 +78,9 @@
         }
         
         NSDictionary *elementDictionary = [dictionary objectForKey:@"elements"];
-//        NSArray *elementKeys = [elementDictionary keysSortedByValueUsingSelector:@selector(compare:)];
+        //        NSArray *elementKeys = [elementDictionary keysSortedByValueUsingSelector:@selector(compare:)];
         NSArray *elementKeys = [elementDictionary allKeys];
-
+        
         NSMutableArray *elements = [NSMutableArray arrayWithCapacity:[elementKeys count]];
         
         for (NSString *key in [elementKeys sortedArrayUsingSelector:@selector(compare:)]) {
@@ -88,12 +93,41 @@
 }
 
 
-//////////////////////////////////////////////////////////////
-#pragma mark - Private methods
-//////////////////////////////////////////////////////////////
+- (NSString *)HTML {
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm"];
+    
+    NSMutableString *output = [[NSMutableString alloc] init];
+    
+    [output appendString:@"<!DOCTYPE html>\r\n<html><head>\r\n<meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\">\r\n"];
+    [output appendString:@"<style \"type\"=\"text/css\">\r\n"];
+    [output appendString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base" ofType:@"css"] encoding:NSUTF8StringEncoding error:nil]];
+    [output appendString:@"</style>\r\n</head>\r\n"];
+    [output appendString:@"<body>\r\n"];
+    [output appendString:@"<div class=\"story\">\r\n"];
+    [output appendFormat:@"<h1>%@</h1>\r\n", [self title]];
+    //    if ([self author]) {
+    //        if ([self publicationDate]) {
+    //            [output appendFormat:@"<h2><img src=\"%@\" alt=\"\"/>By <a href=\"%@\">%@</a>, published on %@</h2>\r\n", [[self author] avatarURL], [[self author] permalinkURL], [dateFormatter stringFromDate:[self publicationDate]]];
+    //        } else {
+    //            [output appendFormat:@"<h2><img src=\"%@\" alt=\"\"/>By <a href=\"%@\">%@</a></h2>\r\n", [[self author] avatarURL], [[self author] permalinkURL]];
+    //        }
+    //    }
+    if ([self description]) {
+        [output appendFormat:@"<p class=\"story-description\">%@</p>", [self description]];
+    }
+    for (Element *element in [self elements]) {
+        [output appendString:[element HTML]];
+    }
+    [output appendString:@"</div>\r\n</body>\r\n</html>"];
+    
+    return [output autorelease];
+}
 
-+ (NSString *)formattedDateRelativeToNow:(NSDate *)date
-{
+
+#pragma mark Private Methods
+
+- (NSString *)formattedDateRelativeToNow:(NSDate *)date {
     NSDateFormatter *mdf = [[NSDateFormatter alloc] init];
     [mdf setDateFormat:@"yyyy-MM-dd"];
     NSDate *midnight = [mdf dateFromString:[mdf stringFromDate:date]];
@@ -124,98 +158,24 @@
         [dateFormatter setDateFormat:@"MMMM d, YYYY'; A long time ago'"];
     
     return [dateFormatter stringFromDate:date];
-} 
-
-- (void)generateHtml
-{
-    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:mm aaa"];
-        
-    NSMutableArray* tags = [NSMutableArray array];
-
-    [tags addObject:@"<!DOCTYPE html>"];
-    [tags addObject:@"<html>"];
-    [tags addObject:@"<head>"];
-    
-    NSMutableString *output = [[NSMutableString alloc] init];
-    
-    [output appendString:@"<!DOCTYPE html>\r\n<html><head>\r\n<meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\">\r\n"];
-    [output appendString:@"<style \"type\"=\"text/css\">\r\n"];
-    [output appendString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base" ofType:@"css"] encoding:NSUTF8StringEncoding error:nil]];
-    [output appendString:@"</style>\r\n</head>\r\n"];
-    [output appendString:@"<body>\r\n"];
-    [output appendString:@"<div class=\"story\">\r\n"];
-    [output appendFormat:@"<h1>%@</h1>\r\n", [self title]];
-//    if ([self author]) {
-//        if ([self publicationDate]) {
-//            [output appendFormat:@"<h2><img src=\"%@\" alt=\"\"/>By <a href=\"%@\">%@</a>, published on %@</h2>\r\n", [[self author] avatarURL], [[self author] permalinkURL], [dateFormatter stringFromDate:[self publicationDate]]];
-//        } else {
-//            [output appendFormat:@"<h2><img src=\"%@\" alt=\"\"/>By <a href=\"%@\">%@</a></h2>\r\n", [[self author] avatarURL], [[self author] permalinkURL]];
-//        }
-//    }
-    if ([self description]) {
-        [output appendFormat:@"<p class=\"story-description\">%@</p>", [self description]];
-    }
-    for (Element *element in [self elements]) {
-        [output appendString:[element HTML]];
-    }
-    [output appendString:@"</div>\r\n</body>\r\n</html>"];
-    
-    return [output autorelease];
 }
 
 
 #pragma mark -
 
-- (NSURL *)permalinkUrl
-{
-    NSString* url = [m_dictionary objectForKey:@"permalink"];
-    if (url && [url isKindOfClass:[NSNull class]] == NO)
-        return [NSURL URLWithString:url];
-    else
-        return nil;
-}
-
-- (NSURL *)permalinkJsonUrl
-{
-    NSString* url = [m_dictionary objectForKey:@"permalink"];
-    if (url && [url isKindOfClass:[NSNull class]] == NO)
-        return [NSURL URLWithString:[url stringByAppendingString:@".json"]];
-    else
-        return nil;
-}
-
-- (NSDate *)publishedAt
-{
-    return [NSDate dateWithTimeIntervalSince1970:[[m_dictionary objectForKey:@"published_at"] integerValue]];
-}
-
-- (NSURL *)shortUrl
-{
-    NSString* url = [m_dictionary objectForKey:@"shorturl"];
-    if (url && [url isKindOfClass:[NSNull class]] == NO)
-        return [NSURL URLWithString:url];
-    else
-        return nil;
-}
-
-- (NSString *)title
-{
-    return [m_dictionary objectForKey:@"title"];
-}
-
-- (NSString *)description
-{
-    return [m_dictionary objectForKey:@"description"];
-}
-
-- (NSURL *)thumbnailUrl
-{
-    NSString* url = [m_dictionary objectForKey:@"thumbnail"];
-    if (url && [url isKindOfClass:[NSNull class]] == NO)
-        return [NSURL URLWithString:url];
-    else
-        return nil;
+- (void)dealloc {
+    [_elements release];
+    [_topics release];
+    [_thumbnailURL release];
+    [_description release];
+    [_title release];
+    [_shortURL release];
+    [_author release];
+    [_publicationDate release];
+    [_permalinkJSONURL release];
+    [_permalinkURL release];
+    
+    [super dealloc];
 }
 
 @end
