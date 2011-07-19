@@ -16,33 +16,38 @@
 
 #import <Foundation/Foundation.h>
 
-@class Author;
-@class Image;
 
-@interface Element : NSObject
-{
-    NSDictionary* m_dictionary;
-    Author* m_author;
-    Image* m_image;
-    NSString* m_html;
+@class Author, Image;
+
+@interface Element : NSObject {
+    NSString *_source;
+    NSString *_elementClass;
+    NSURL *_permalinkURL;
+    NSString *_title;
+    NSString *_description;
+    NSURL *_thumbnailURL;
+    NSURL *_faviconURL;
+    Author *_author;
+    NSDate *_creationDate;
+    NSDate *_additionDate;
+    NSString *_oembed;
+    Image *_image;
 }
 
-//@property (nonatomic, readonly) Editor* editor;
-@property (nonatomic, readonly) NSString* source;
-@property (nonatomic, readonly) NSString* elementClass;
-@property (nonatomic, readonly) NSURL* permalinkUrl;
-@property (nonatomic, readonly) NSString* title;
-@property (nonatomic, readonly) NSString* description;
-@property (nonatomic, readonly) NSURL* thumbnailUrl;
-@property (nonatomic, readonly) NSURL* favIconUrl;
-@property (nonatomic, readonly) Author* author;
-@property (nonatomic, readonly) NSDate* createdAt;
-@property (nonatomic, readonly) NSDate* addedAt;
-@property (nonatomic, readonly) NSString* oEmbedHtml;
-@property (nonatomic, readonly) Image* image;
-
-@property (nonatomic, readonly) NSString* html;
+@property (nonatomic, retain) NSString *source;
+@property (nonatomic, retain) NSString *elementClass;
+@property (nonatomic, retain) NSURL *permalinkURL;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *description;
+@property (nonatomic, retain) NSURL *thumbnailURL;
+@property (nonatomic, retain) NSURL *faviconURL;
+@property (nonatomic, retain) Author *author;
+@property (nonatomic, retain) NSDate *creationDate;
+@property (nonatomic, retain) NSDate *additionDate;
+@property (nonatomic, retain) NSString *oembed;
+@property (nonatomic, retain) Image *image;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSString *)HTML;
 
 @end

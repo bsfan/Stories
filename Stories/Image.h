@@ -16,17 +16,20 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Image : NSObject
-{
-    NSDictionary* m_dictionary;
-    NSString* m_html;
+
+@interface Image : NSObject {
+    NSURL *_sourceURL;
+    NSURL *_linkURL;
+    NSString *_width;
+    NSString *_height;
 }
 
-@property (nonatomic, readonly) NSURL* srcUrl;
-@property (nonatomic, readonly) NSURL* hrefUrl;
-
-@property (nonatomic, readonly) NSString* html;
+@property (nonatomic, retain) NSURL *sourceURL;
+@property (nonatomic, retain) NSURL *linkURL;
+@property (nonatomic, retain) NSString *width;
+@property (nonatomic, retain) NSString *height;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSString *)HTML;
 
 @end

@@ -30,7 +30,7 @@
     if (self) {
         m_story = [story retain];
         m_webView = [[[UIWebView alloc] initWithFrame:self.frame] retain];
-        [m_webView loadHTMLString:story.html baseURL:nil];
+        [m_webView loadHTMLString:[story HTML] baseURL:nil];
         [m_webView setDelegate:self];
         
         [self addSubview:m_webView];

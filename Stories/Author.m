@@ -16,74 +16,71 @@
 
 #import "Author.h"
 
+
 @implementation Author
 
-@synthesize username;
-@synthesize name;
-@synthesize avatarUrl;
-@synthesize description;
-@synthesize location;
-@synthesize website;
-@synthesize permalinkUrl;
+@synthesize username=_username;
+@synthesize name=_name;
+@synthesize avatarURL=_avatarURL;
+@synthesize description=_description;
+@synthesize location=_location;
+@synthesize website=_website;
+@synthesize permalinkURL=_permalinkURL;
 
-- (id)init
-{
+
+- (id)init {
     return [self initWithDictionary:nil];
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
+- (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        m_dictionary = [dictionary retain];
+        id username = [dictionary objectForKey:@"username"];
+        if (username && [username isKindOfClass:[NSString class]]) {
+            [self setUsername:username];
+        }
+        id name = [dictionary objectForKey:@"name"];
+        if (name && [name isKindOfClass:[NSString class]]) {
+            [self setName:name];
+        }
+        id avatar = [dictionary objectForKey:@"avatar"];
+        if (avatar && [avatar isKindOfClass:[NSString class]]) {
+            [self setAvatarURL:[NSURL URLWithString:avatar]];
+        }
+        id description = [dictionary objectForKey:@"description"];
+        if (description && [description isKindOfClass:[NSString class]]) {
+            [self setDescription:description];
+        }
+        id location = [dictionary objectForKey:@"location"];
+        if (location && [location isKindOfClass:[NSString class]]) {
+            [self setLocation:location];
+        }
+        id website = [dictionary objectForKey:@"website"];
+        if (website && [website isKindOfClass:[NSString class]]) {
+            [self setWebsite:website];
+        }
+        id permalink = [dictionary objectForKey:@"permalink"];
+        if (permalink && [permalink isKindOfClass:[NSString class]]) {
+            [self setPermalinkURL:[NSURL URLWithString:permalink]];
+        }
     }
     
     return self;
 }
 
-- (void)dealloc
-{
-    [m_dictionary release];
+
+#pragma mark -
+
+- (void)dealloc {
+    [_permalinkURL release];
+    [_website release];
+    [_location release];
+    [_description release];
+    [_avatarURL release];
+    [_name release];
+    [_username release];
+    
     [super dealloc];
-}
-
-//////////////////////////////////////////////////////////////
-#pragma mark - Public methods
-//////////////////////////////////////////////////////////////
-
-- (NSString *)username
-{
-    return [m_dictionary objectForKey:@"username"];
-}
-
-- (NSString *)name
-{
-    return [m_dictionary objectForKey:@"name"];
-}
-
-- (NSURL *)avatarUrl
-{
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"avatar"]];
-}
-
-- (NSString *)description
-{
-    return [m_dictionary objectForKey:@"description"];
-}
-
-- (NSString *)location
-{
-    return [m_dictionary objectForKey:@"location"];
-}
-
-- (NSString *)website
-{
-    return [m_dictionary objectForKey:@"website"];
-}
-
-- (NSURL *)permalinkUrl
-{
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"permalink"]];
 }
 
 @end

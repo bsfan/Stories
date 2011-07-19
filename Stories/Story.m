@@ -18,161 +18,123 @@
 #import "Author.h"
 #import "Element.h"
 
-@interface Story()
-- (void)generateHtml;
-@end
 
 @implementation Story
 
-@synthesize permalinkUrl;
-@synthesize permalinkJsonUrl;
-@synthesize publishedAt;
-@synthesize author = m_author;
-@synthesize editors = m_editors;
-@synthesize shortUrl;
-@synthesize title;
-@synthesize description;
-@synthesize thumbnailUrl;
-@synthesize topicsUrl = m_topicsUrl;
-@synthesize elements = m_elements;
-//@synthesize stats = m_stats;
+@synthesize permalinkURL=_permalinkURL;
+@synthesize permalinkJSONURL=_permalinkJSONURL;
+@synthesize publicationDate=_publicationDate;
+@synthesize author=_author;
+@synthesize shortURL=_shortURL;
+@synthesize title=_title;
+@synthesize description=_description;
+@synthesize thumbnailURL=_thumbnailURL;
+@synthesize topics=_topics;
+@synthesize elements=_elements;
 
-@synthesize html = m_html;
 
-- (id)init
-{
-    return [self initWithDictionary:nil];
-}
-
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
+- (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        m_dictionary = [dictionary retain];
-        m_author = [[[Author alloc] initWithDictionary:[dictionary objectForKey:@"author"]] retain];
-        m_editors = [[[NSMutableArray alloc] init] retain];
-        m_topicsUrl = [[[NSMutableArray alloc] init] retain];
-        m_elements = [[[NSMutableArray alloc] init] retain];
-//        m_stats = [[[Stats alloc] initWithDictionary:[dictionary objectForKey:@"stats"]] retain];
-
-        NSDictionary* elements = [dictionary objectForKey:@"elements"];
-        NSArray* elementsKeys = [elements allKeys];
-        
-        NSMutableArray* elementsKeysInt = [NSMutableArray arrayWithCapacity:elementsKeys.count];
-        for (NSString* key in elementsKeys) {
-            [elementsKeysInt addObject:[NSNumber numberWithInteger:[key integerValue]]];
+        id permalink = [dictionary objectForKey:@"permalink"];
+        if (permalink && [permalink isKindOfClass:[NSString class]]) {
+            [self setPermalinkURL:[NSURL URLWithString:permalink]];
+            [self setPermalinkJSONURL:[NSURL URLWithString:[(NSString *)permalink stringByAppendingString:@".json"]]];
         }
-
-        for (NSNumber* key in [elementsKeysInt sortedArrayUsingSelector:@selector(compare:)])
-            [m_elements addObject:[[Element alloc] initWithDictionary:[elements objectForKey:[NSString stringWithFormat:@"%@", key]]]];
+        id publishedAt = [dictionary objectForKey:@"published_at"];
+        if (publishedAt && [publishedAt isKindOfClass:[NSString class]]) {
+            [self setPublicationDate:[NSDate dateWithTimeIntervalSince1970:[(NSString *)publishedAt integerValue]]];
+        }
+        id author = [dictionary objectForKey:@"author"];
+        if (author && [author isKindOfClass:[NSDictionary class]]) {
+            [self setAuthor:[[Author alloc] initWithDictionary:author]];
+        }
+        id shorturl = [dictionary objectForKey:@"shorturl"];
+        if (shorturl && [shorturl isKindOfClass:[NSString class]]) {
+            [self setShortURL:[NSURL URLWithString:shorturl]];
+        }
+        id title = [dictionary objectForKey:@"title"];
+        if (title && [title isKindOfClass:[NSString class]]) {
+            [self setTitle:title];
+        }
+        id description = [dictionary objectForKey:@"description"];
+        if (description && [description isKindOfClass:[NSString class]]) {
+            [self setDescription:description];
+        }
+        id thumbnail = [dictionary objectForKey:@"thumbnail"];
+        if (thumbnail && [thumbnail isKindOfClass:[NSString class]]) {
+            [self setThumbnailURL:[NSURL URLWithString:thumbnail]];
+        } else {
+            [self setThumbnailURL:[_author avatarURL]];
+        }
+        id topics = [dictionary objectForKey:@"topics"];
+        if (topics && [topics isKindOfClass:[NSArray class]]) {
+            [self setTopics:topics];
+        }
         
-        [self generateHtml];
+        NSDictionary *elementDictionary = [dictionary objectForKey:@"elements"];
+//        NSArray *elementKeys = [elementDictionary keysSortedByValueUsingSelector:@selector(compare:)];
+        NSArray *elementKeys = [elementDictionary allKeys];
+
+        NSMutableArray *elements = [NSMutableArray arrayWithCapacity:[elementKeys count]];
+        
+        for (NSString *key in [elementKeys sortedArrayUsingSelector:@selector(compare:)]) {
+            [elements addObject:[[Element alloc] initWithDictionary:[elementDictionary objectForKey:key]]];
+        }
+        [self setElements:elements];
     }
     
     return self;
 }
 
-- (void)dealloc
-{
-    [m_html release];
-//    [m_stats release];
-    [m_elements release];
-    [m_topicsUrl release];
-    [m_editors release];
-    [m_author release];
-    [m_dictionary release];
-    [super dealloc];
-}
 
-//////////////////////////////////////////////////////////////
-#pragma mark - Private methods
-//////////////////////////////////////////////////////////////
-
-- (void)generateHtml
-{
-    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:m"];
-        
-    NSMutableArray* tags = [NSMutableArray array];
-
-    [tags addObject:@"<!DOCTYPE html>"];
-    [tags addObject:@"<html>"];
-    [tags addObject:@"<head>"];
+- (NSString *)HTML {
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm"];
     
-    [tags addObject:[NSString stringWithFormat:@"<title>%@</title>", self.title]];
-    [tags addObject:@"<meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\">"];
+    NSMutableString *output = [[NSMutableString alloc] init];
     
-    [tags addObject:@"<style TYPE=\"text/css\">"];
-    [tags addObject:@"<!--"];
-    [tags addObject:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base" ofType:@"css"] encoding:NSUTF8StringEncoding error:nil]];
-    [tags addObject:@"-->"];
-    [tags addObject:@"</style>"];
-
-    [tags addObject:@"</head>"];
-    [tags addObject:@"<body>"];
-        
-    [tags addObject:@"<div class=\"story\">"];
-    
-    [tags addObject:[NSString stringWithFormat:@"<h1>%@</h1>", self.title]];
-    
-    if (self.author)
-        [tags addObject:[NSString stringWithFormat:@"<h2><img src=\"%@\" alt=\"\"/>By <a href=\"%@\">%@</a>, published on %@</h2>", [[NSString stringWithFormat:@"%@", self.author.avatarUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [[NSString stringWithFormat:@"%@", self.author.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.author.name, [dateFormatter stringFromDate:self.publishedAt]]];
-
-    if (self.description)
-        [tags addObject:[NSString stringWithFormat:@"<p class=\"story-description\">%@</p>", self.description]];
-
-    for (Element* element in m_elements)
-    {
-        if (![element.source isEqualToString:@"Feedburner"])
-            [tags addObject:element.html];
+    [output appendString:@"<!DOCTYPE html>\r\n<html><head>\r\n<meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\">\r\n"];
+    [output appendString:@"<style \"type\"=\"text/css\">\r\n"];
+    [output appendString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base" ofType:@"css"] encoding:NSUTF8StringEncoding error:nil]];
+    [output appendString:@"</style>\r\n</head>\r\n"];
+    [output appendString:@"<body>\r\n"];
+    [output appendString:@"<div class=\"story\">\r\n"];
+    [output appendFormat:@"<h1>%@</h1>\r\n", [self title]];
+//    if ([self author]) {
+//        if ([self publicationDate]) {
+//            [output appendFormat:@"<h2><img src=\"%@\" alt=\"\"/>By <a href=\"%@\">%@</a>, published on %@</h2>\r\n", [[self author] avatarURL], [[self author] permalinkURL], [dateFormatter stringFromDate:[self publicationDate]]];
+//        } else {
+//            [output appendFormat:@"<h2><img src=\"%@\" alt=\"\"/>By <a href=\"%@\">%@</a></h2>\r\n", [[self author] avatarURL], [[self author] permalinkURL]];
+//        }
+//    }
+    if ([self description]) {
+        [output appendFormat:@"<p class=\"story-description\">%@</p>", [self description]];
     }
+    for (Element *element in [self elements]) {
+        [output appendString:[element HTML]];
+    }
+    [output appendString:@"</div>\r\n</body>\r\n</html>"];
     
-    [tags addObject:@"</div>"];
-
-    [tags addObject:@"</body>"];
-    [tags addObject:@"</html>"];
-
-    m_html = [[tags componentsJoinedByString:@"\n"] retain];
+    return [output autorelease];
 }
 
-//////////////////////////////////////////////////////////////
-#pragma mark - Public methods
-//////////////////////////////////////////////////////////////
 
+#pragma mark -
 
-- (NSURL *)permalinkUrl
-{
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"permalink"]];
-}
-
-- (NSURL *)permalinkJsonUrl
-{
-    return [NSURL URLWithString:[[m_dictionary objectForKey:@"permalink"] stringByAppendingString:@".json"]];
-}
-
-- (NSDate *)publishedAt
-{
-    return [NSDate dateWithTimeIntervalSince1970:[[m_dictionary objectForKey:@"published_at"] integerValue]];
-}
-
-- (NSURL *)shortUrl
-{
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"shorturl"]];
-}
-
-- (NSString *)title
-{
-    return [m_dictionary objectForKey:@"title"];
-}
-
-- (NSString *)description
-{
-    return [m_dictionary objectForKey:@"description"];
-}
-
-- (NSURL *)thumbnailUrl
-{
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"thumbnail"]];
+- (void)dealloc {
+    [_elements release];
+    [_topics release];
+    [_thumbnailURL release];
+    [_description release];
+    [_title release];
+    [_shortURL release];
+    [_author release];
+    [_publicationDate release];
+    [_permalinkJSONURL release];
+    [_permalinkURL release];
+    
+    [super dealloc];
 }
 
 @end

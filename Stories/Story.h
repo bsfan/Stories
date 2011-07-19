@@ -16,34 +16,34 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class Author;
 
-@interface Story : NSObject
-{
-    NSDictionary* m_dictionary;
-    Author* m_author;
-    NSMutableArray* m_editors;
-    NSMutableArray* m_topicsUrl;
-    NSMutableArray* m_elements;
-//    Stats* m_stats;
-    NSString* m_html;
+@interface Story : NSObject {
+    NSURL *_permalinkURL;
+    NSURL *_permalinkJSONURL;
+    NSDate *_publicationDate;
+    Author *_author;
+    NSURL *_shortURL;
+    NSString *_title;
+    NSString *_description;
+    NSURL *_thumbnailURL;
+    NSArray *_topics;
+    NSArray *_elements;
 }
 
-@property (nonatomic, readonly) NSURL* permalinkUrl;
-@property (nonatomic, readonly) NSURL* permalinkJsonUrl; // Use this to load the story content
-@property (nonatomic, readonly) NSDate* publishedAt;
-@property (nonatomic, readonly) Author* author;
-@property (nonatomic, readonly) NSArray* editors;
-@property (nonatomic, readonly) NSURL* shortUrl;
-@property (nonatomic, readonly) NSString* title;
-@property (nonatomic, readonly) NSString* description;
-@property (nonatomic, readonly) NSURL* thumbnailUrl;
-@property (nonatomic, readonly) NSArray* topicsUrl;
-@property (nonatomic, readonly) NSArray* elements;
-//@property (nonatomic, readonly) Stats* stats;
-
-@property (nonatomic, readonly) NSString* html;
+@property (nonatomic, retain) NSURL *permalinkURL;
+@property (nonatomic, retain) NSURL *permalinkJSONURL;
+@property (nonatomic, retain) NSDate *publicationDate;
+@property (nonatomic, retain) Author *author;
+@property (nonatomic, retain) NSURL *shortURL;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *description;
+@property (nonatomic, retain) NSURL *thumbnailURL;
+@property (nonatomic, retain) NSArray *topics;
+@property (nonatomic, retain) NSArray *elements;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSString *)HTML;
 
 @end

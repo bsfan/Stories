@@ -16,18 +16,24 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Author : NSObject
-{
-    NSDictionary* m_dictionary;
+
+@interface Author : NSObject {
+    NSString *_username;
+    NSString *_name;
+    NSURL *_avatarURL;
+    NSString *_description;
+    NSString *_location;
+    NSString *_website;
+    NSURL *_permalinkURL;
 }
 
-@property (nonatomic, readonly) NSString* username;
-@property (nonatomic, readonly) NSString* name;
-@property (nonatomic, readonly) NSURL* avatarUrl;
-@property (nonatomic, readonly) NSString* description;
-@property (nonatomic, readonly) NSString* location;
-@property (nonatomic, readonly) NSString* website;
-@property (nonatomic, readonly) NSURL* permalinkUrl;
+@property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSURL *avatarURL;
+@property (nonatomic, retain) NSString *description;
+@property (nonatomic, retain) NSString *location;
+@property (nonatomic, retain) NSString *website;
+@property (nonatomic, retain) NSURL *permalinkURL;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

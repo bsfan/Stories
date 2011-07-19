@@ -16,70 +16,60 @@
 
 #import "Image.h"
 
-@interface Image()
-- (void)generateHtml;
-@end
 
 @implementation Image
 
-@synthesize srcUrl;
-@synthesize hrefUrl;
+@synthesize sourceURL=_sourceURL;
+@synthesize linkURL=_linkURL;
+@synthesize width=_width;
+@synthesize height=_height;
 
-@synthesize html = m_html;
-
-- (id)init
-{
-    return [self initWithDictionary:nil];
-}
-
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
+- (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        m_dictionary = [dictionary retain];
-        
-        [self generateHtml];
+        id src = [dictionary objectForKey:@"src"];
+        if (src && [src isKindOfClass:[NSString class]]) {
+            [self setSourceURL:[NSURL URLWithString:src]];
+        }
+        id href = [dictionary objectForKey:@"href"];
+        if (href && [href isKindOfClass:[NSString class]]) {
+            [self setLinkURL:[NSURL URLWithString:href]];
+        }
+        id width = [dictionary objectForKey:@"width"];
+        if (width && [width isKindOfClass:[NSString class]]) {
+            [self setWidth:width];
+        }
+        id height = [dictionary objectForKey:@"height"];
+        if (height && [height isKindOfClass:[NSString class]]) {
+            [self setHeight:height];
+        }
     }
     
     return self;
 }
 
-- (void)dealloc
-{
-    [m_html release];
-    [m_dictionary release];
+- (NSString *)HTML {
+    NSMutableString *output = [[NSMutableString alloc] init];
+    
+    if (_linkURL) {
+        [output appendFormat:@"<a href=\"%@\">", [self linkURL]];
+    }
+    [output appendFormat:@"<img src=\"%@\" alt=\"\"/>", [self sourceURL]];
+    if (_linkURL) {
+        [output appendString:@"</a>"];
+    }
+    
+    return [output autorelease];
+}
+
+
+#pragma mark -
+
+- (void)dealloc {
+    [_linkURL release];
+    [_sourceURL release];
+    
     [super dealloc];
-}
-
-//////////////////////////////////////////////////////////////
-#pragma mark - Private methods
-//////////////////////////////////////////////////////////////
-
-- (void)generateHtml
-{
-    m_html = [[NSString stringWithFormat:@"<a href=\"%@\"><img src=\"%@\" alt=\"\"/></a>", [[NSString stringWithFormat:@"%@", self.hrefUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [[NSString stringWithFormat:@"%@", self.srcUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] retain];
-}
-
-//////////////////////////////////////////////////////////////
-#pragma mark - Public methods
-//////////////////////////////////////////////////////////////
-
-- (NSURL *)srcUrl
-{
-    NSString* src = [m_dictionary objectForKey:@"src"];
-    if (src && [src isEqualToString:@"null"] == NO)
-        return [NSURL URLWithString:src];
-    else
-        return nil;
-}
-
-- (NSURL *)hrefUrl
-{
-    NSString* href = [m_dictionary objectForKey:@"href"];
-    if (href && [href isEqualToString:@"null"] == NO)
-        return [NSURL URLWithString:href];
-    else
-        return nil;
 }
 
 @end

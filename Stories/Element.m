@@ -18,228 +18,178 @@
 #import "Author.h"
 #import "Image.h"
 
-@interface Element()
-- (void)generateHtml;
-@end
-
 @implementation Element
 
-//@synthesize editor;
-@synthesize source;
-@synthesize elementClass;
-@synthesize permalinkUrl;
-@synthesize title;
-@synthesize description;
-@synthesize thumbnailUrl;
-@synthesize favIconUrl;
-@synthesize author = m_author;
-@synthesize createdAt;
-@synthesize addedAt;
-@synthesize oEmbedHtml;
-@synthesize image = m_image;;
+@synthesize source=_source;
+@synthesize elementClass=_elementClass;
+@synthesize permalinkURL=_permalinkURL;
+@synthesize title=_title;
+@synthesize description=_description;
+@synthesize thumbnailURL=_thumbnailURL;
+@synthesize faviconURL=_faviconURL;
+@synthesize author=_author;
+@synthesize creationDate=_creationDate;
+@synthesize additionDate=_additionDate;
+@synthesize oembed=_oembed;
+@synthesize image=_image;
 
-@synthesize html = m_html;
 
-- (id)init
-{
-    return [self initWithDictionary:nil];
-}
-
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
+- (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        m_dictionary = [dictionary retain];
-        m_author = [[[Author alloc] initWithDictionary:[dictionary objectForKey:@"author"]] retain];
+        id source = [dictionary objectForKey:@"source"];
+        if (source && [source isKindOfClass:[NSString class]]) {
+            [self setSource:source];
+        }
+        id elementClass = [dictionary objectForKey:@"elementClass"];
+        if (elementClass && [elementClass isKindOfClass:[NSString class]]) {
+            [self setElementClass:elementClass];
+        }
+        id permalink = [dictionary objectForKey:@"permalink"];
+        if (permalink && [permalink isKindOfClass:[NSString class]]) {
+            [self setPermalinkURL:[NSURL URLWithString:permalink]];
+        }
+        id title = [dictionary objectForKey:@"title"];
+        if (title && [title isKindOfClass:[NSString class]]) {
+            [self setTitle:title];
+        }
+        id description = [dictionary objectForKey:@"description"];
+        if (description && [description isKindOfClass:[NSString class]]) {
+            [self setDescription:description];
+        }
+        id thumbnail = [dictionary objectForKey:@"thumbnail"];
+        if (thumbnail && [thumbnail isKindOfClass:[NSString class]]) {
+            [self setThumbnailURL:[NSURL URLWithString:thumbnail]];
+        }
+        id favicon = [dictionary objectForKey:@"favicon"];
+        if (favicon && [favicon isKindOfClass:[NSString class]]) {
+            [self setFaviconURL:[NSURL URLWithString:favicon]];
+        }
+        id author = [dictionary objectForKey:@"author"];
+        if (author && [author isKindOfClass:[NSDictionary class]]) {
+            [self setAuthor:[[Author alloc] initWithDictionary:author]];
+        }
+        id createdAt = [dictionary objectForKey:@"created_at"];
+        if (createdAt && [createdAt isKindOfClass:[NSString class]]) {
+            [self setCreationDate:[NSDate dateWithTimeIntervalSince1970:[createdAt integerValue]]];
+        }
+        id addedAt = [dictionary objectForKey:@"added_at"];
+        if (addedAt && [addedAt isKindOfClass:[NSString class]]) {
+            [self setAdditionDate:[NSDate dateWithTimeIntervalSince1970:[addedAt integerValue]]];
+        }
+        id oembed = [dictionary objectForKey:@"oembed"];
+        if (oembed && [oembed isKindOfClass:[NSDictionary class]]) {
+            [self setOembed:[(NSDictionary *)oembed objectForKey:@"html"]];
+        } else if (oembed && [oembed isKindOfClass:[NSString class]]) {
+            [self setOembed:(NSString *)oembed];
+        }
         
-        NSString* image = [dictionary objectForKey:@"image"];
-        if (image && [image isKindOfClass:[NSDictionary class]])
-            m_image = [[[Image alloc] initWithDictionary:[dictionary objectForKey:@"image"]] retain];
-        
-        [self generateHtml];
+        id image = [dictionary objectForKey:@"image"];
+        if (image && [image isKindOfClass:[NSDictionary class]]) {
+            [self setImage:[[Image alloc] initWithDictionary:image]];
+        }
     }
     
     return self;
 }
 
-- (void) dealloc
-{
-    [m_html release];
-    [m_image release];
-    [m_author release];
-    [m_dictionary release];
+
+- (NSString *)HTML {
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm"];
+    
+    NSMutableString *output = [[NSMutableString alloc] init];
+    
+    BOOL appendAuthorInfo = NO;
+    
+    [output appendFormat:@"<div class=\"story-element source-%@\">", [self source]];
+    
+    if ([[self source] isEqualToString:@"storify"]) {
+        if (![self oembed]) {
+            [output appendString:@"<div class=\"text\">"];
+            [output appendString:[self description]];
+            [output appendString:@"</div>"];
+        } else {
+            [output appendString:[self oembed]];
+        }
+    } else if ([[self source] isEqualToString:@"twitter"] || [[self source] isEqualToString:@"facebook"]) {
+        if ([self image]) {
+            [output appendString:[[self image] HTML]];
+        }
+        
+        [output appendString:@"<div class=\"text\">"];
+        [output appendString:[self description]];
+        [output appendString:@"</div>"];
+        appendAuthorInfo = YES;
+    } else if ([[self source] isEqualToString:@"youtube"] || [[self source] isEqualToString:@"SlideShare"]) {
+        if ([self oembed]) {
+            [output appendString:[self oembed]];
+        }
+        
+        [output appendString:@"<div class=\"title\">"];
+        [output appendString:[self title]];
+        [output appendString:@"</div>"];
+        appendAuthorInfo = YES;
+    } else if ([[self source] isEqualToString:@"xml"] || [[self source] isEqualToString:@"google"]) {
+        [output appendString:@"<div class=\"title\">"];
+        [output appendFormat:@"<a href=\"%@\">%@</a>", [self permalinkURL], [self title]];
+        [output appendString:@"</div>"];
+        
+        [output appendString:@"<div class=\"text\">"];
+        [output appendString:[self description]];
+        [output appendString:@"</div>"];
+        appendAuthorInfo = YES;
+    } else if ([[self source] isEqualToString:@"flickr"]) {
+        if ([self image]) {
+            [output appendString:[[self image] HTML]];
+        }
+        
+        [output appendString:@"<div class=\"title\">"];
+        [output appendFormat:@"<a href=\"%@\">Photo by %@</a>", [self permalinkURL], [self title]];
+        [output appendString:@"</div>"];
+    }
+    
+    if (appendAuthorInfo && [self author]) {
+        [output appendString:@"<div class=\"author\">"];
+        
+        if ([[self author] permalinkURL]) {
+            [output appendFormat:@"<span class=\"name\"><a href=\"%@\">%@</a></span>", [[self author] permalinkURL], [[self author] name]];
+        } else {
+            [output appendFormat:@"<span class=\"name\">%@</span>", [[self author] name]];
+        }
+        
+        [output appendFormat:@"<span class=\"permalink\"><img src=\"%@\" alt=\"\"/><a href=\"%@\">%@</a></span>", [self faviconURL], [self permalinkURL], [dateFormatter stringFromDate:[self creationDate]]];
+        
+        if ([[self author] avatarURL]) {
+            [output appendFormat:@"<img class=\"avatar\" src=\"%@\" alt=\"\"/>", [[self author] avatarURL]];
+        }
+        
+        [output appendString:@"</div>"];
+    }
+    
+    [output appendString:@"</div>"];
+    
+    return [output autorelease];
+}
+
+
+#pragma mark -
+
+- (void)dealloc {
+    [_image release];
+    [_oembed release];
+    [_additionDate release];
+    [_creationDate release];
+    [_author release];
+    [_faviconURL release];
+    [_thumbnailURL release];
+    [_description release];
+    [_title release];
+    [_permalinkURL release];
+    [_elementClass release];
+    [_source release];
+    
     [super dealloc];
-}
-
-//////////////////////////////////////////////////////////////
-#pragma mark - Private methods
-//////////////////////////////////////////////////////////////
-
-- (void)generateHtml
-{
-    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMMM d, y 'at' h:m"];
-
-    NSMutableArray* tags = [NSMutableArray array];
-    
-    [tags addObject:[NSString stringWithFormat:@"<div class=\"story-element source-%@\">", self.source]];
-    
-    BOOL displayAuthor = NO;
-    
-    if ([self.source isEqualToString:@"storify"])
-    {
-        if (self.oEmbedHtml == nil)
-        {
-            // Text
-            [tags addObject:@"<div class=\"text\">"];
-            [tags addObject:self.description];
-            [tags addObject:@"</div>"];
-        }
-        else
-        {
-            // Embedded story
-            [tags addObject:self.oEmbedHtml];
-        }
-    }
-    else if ([self.source isEqualToString:@"twitter"] ||
-             [self.source isEqualToString:@"facebook"])
-    {
-        // Image (if available)
-        if (self.image)
-            [tags addObject:self.image.html];
-        
-        // Tweet/Facebook Post
-        [tags addObject:@"<div class=\"text\">"];
-        [tags addObject:self.description];
-        [tags addObject:@"</div>"];
-
-        displayAuthor = YES;
-    }
-    else if ([self.source isEqualToString:@"youtube"] ||
-             [self.source isEqualToString:@"SlideShare"])
-    {
-        // Embed
-        if (self.oEmbedHtml)
-            [tags addObject:self.oEmbedHtml];
-        
-        // Title
-        [tags addObject:@"<div class=\"title\">"];
-        [tags addObject:self.title];
-        [tags addObject:@"</div>"];
-        
-        displayAuthor = YES;
-    }
-    else if ([self.source isEqualToString:@"xml"] ||
-             [self.source isEqualToString:@"google"])
-    {
-        // Title
-        [tags addObject:@"<div class=\"title\">"];
-        [tags addObject:[NSString stringWithFormat:@"<a href=\"%@\">%@</a>", [[NSString stringWithFormat:@"%@", self.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.title]];
-        [tags addObject:@"</div>"];
-        
-        // Text
-        [tags addObject:@"<div class=\"text\">"];
-        [tags addObject:self.description];
-        [tags addObject:@"</div>"];
-        
-        displayAuthor = YES;
-    }
-    else if ([self.source isEqualToString:@"flickr"])
-    {
-        // Image (if available)
-        if (self.image)
-            [tags addObject:self.image.html];
-        
-        // Title
-        [tags addObject:@"<div class=\"title\">"];
-        [tags addObject:[NSString stringWithFormat:@"<a href=\"%@\">Photo by %@</a>", [[NSString stringWithFormat:@"%@", self.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.title]];
-        [tags addObject:@"</div>"];
-    }
-    else
-    {
-        // TODO: Support unknown sources
-    }
-    
-    // Author and date published
-    if (displayAuthor == YES && self.author)
-    {
-        [tags addObject:@"<div class=\"author\">"];
-        
-        if (self.author.permalinkUrl)
-            [tags addObject:[NSString stringWithFormat:@"<span class=\"name\"><a href=\"%@\">%@</a></span>", [[NSString stringWithFormat:@"%@", self.author.permalinkUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.author.name]];
-        else
-            [tags addObject:[NSString stringWithFormat:@"<span class=\"name\">%@</span>", self.author.name]];
-        
-        [tags addObject:[NSString stringWithFormat:@"<span class=\"permalink\"><img src=\"%@\" alt=\"\"/><a href=\"%@\">%@</a></span>", [[NSString stringWithFormat:@"%@", self.favIconUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.permalinkUrl, [dateFormatter stringFromDate:self.createdAt]]];
-        
-        if (self.author.avatarUrl)
-            [tags addObject:[NSString stringWithFormat:@"<img class=\"avatar\" src=\"%@\" alt=\"\"/>", [[NSString stringWithFormat:@"%@", self.author.avatarUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-        
-        [tags addObject:@"</div>"];	
-    }    
-    
-    [tags addObject:@"</div>"];
-    
-    m_html = [[tags componentsJoinedByString:@"\n"] retain];
-}
-
-//////////////////////////////////////////////////////////////
-#pragma mark - Public methods
-//////////////////////////////////////////////////////////////
-
-- (NSString *)source
-{
-    return [m_dictionary objectForKey:@"source"];
-}
-
-- (NSString *)elementClass
-{
-    return [m_dictionary objectForKey:@"elementClass"];
-}
-
-- (NSURL *)permalinkUrl
-{
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"permalink"]];
-}
-
-- (NSString *)title
-{
-    return [m_dictionary objectForKey:@"title"];
-}
-
-- (NSString *)description
-{
-    return [m_dictionary objectForKey:@"description"];
-}
-
-- (NSURL *)thumbnailUrl
-{
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"thumbnail"]];
-}
-
-- (NSURL *)favIconUrl
-{
-    return [NSURL URLWithString:[m_dictionary objectForKey:@"favicon"]];
-}
-
-- (NSDate *)createdAt
-{
-    return [NSDate dateWithTimeIntervalSince1970:[[m_dictionary objectForKey:@"created_at"] integerValue]];
-}
-
-- (NSDate *)addedAt
-{
-    return [NSDate dateWithTimeIntervalSince1970:[[m_dictionary objectForKey:@"added_at"] integerValue]];
-}
-
-- (NSString *)oEmbedHtml
-{
-    NSObject* object = [m_dictionary objectForKey:@"oembed"];
-    if ([object isKindOfClass:[NSDictionary class]])
-        return [(NSDictionary *) object objectForKey:@"html"];
-    else if ([object isKindOfClass:[NSString class]])
-        return (NSString *) object;
-    else return nil;
 }
 
 @end

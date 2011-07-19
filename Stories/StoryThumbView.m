@@ -34,13 +34,7 @@
         
         _imageView = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"placeholder"]];
         
-        NSURL *imageURL = nil;
-        if ([story thumbnailUrl]) {
-            imageURL = [story thumbnailUrl];
-        } else {
-            imageURL = [[story author] avatarUrl];
-        }
-        [_imageView setImageURL:imageURL];
+        [_imageView setImageURL:[story thumbnailURL]];
         [self addSubview:_imageView];
         
         _titleLabel = [[UILabel alloc] init];
@@ -65,9 +59,8 @@
 
 
 - (void)handleTapGesture:(UIGestureRecognizer *)sender {
-    NSLog(@"permalink: %@", [_story permalinkJsonUrl]);
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [_story permalinkJsonUrl] , @"PermalinkURL", nil];
+                              [_story permalinkJSONURL] , @"PermalinkURL", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectStory" object:nil userInfo:userInfo];
 }
 
