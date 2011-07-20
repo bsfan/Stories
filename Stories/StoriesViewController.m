@@ -132,6 +132,8 @@
     [_backgroundView release];
     [_storiesBrowserView release];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [super dealloc];
 }
 
