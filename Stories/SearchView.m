@@ -17,6 +17,7 @@
 #import "SearchView.h"
 
 
+
 @implementation SearchView
 
 @synthesize searchTextField=_searchTextField;
@@ -25,8 +26,13 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
         
-        [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"SearchBackground"]]];
+        [self setContentSize:frame.size];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SearchBackground"]];
+        [self addSubview:imageView];
+        [imageView release];
         
         _searchTextField = [[UITextField alloc] init];
         [_searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
@@ -53,19 +59,45 @@
 }
 
 - (void)layoutSubviews {
-    CGRect searchTextFieldFrame = CGRectMake(280.0, 100.0, 335.0, 31.0);
+    CGRect searchTextFieldFrame = CGRectMake(280.0, 490, 335.0, 31.0);
     [_searchTextField setFrame:searchTextFieldFrame];
     
-    CGRect searchButtonFrame = CGRectMake(630.0, 94.0, 140.0, 45.0);
+    CGRect searchButtonFrame = CGRectMake(630.0, 484, 140.0, 45.0);
     [_searchButton setFrame:searchButtonFrame];
 }
 
+- (void)keyboardDidShow:(NSNotification *)notification {
+	// keyboard frame is in window coordinates
+	NSDictionary *userInfo = [notification userInfo];
+	CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+	// convert own frame to window coordinates, frame is in superview's coordinates
+    CGRect ownFrame = [[self window] convertRect:[self frame] fromView:[self superview]];
+    
+	// calculate the area of own frame that is covered by keyboard
+	CGRect coveredFrame = CGRectIntersection(ownFrame, keyboardFrame);
+    
+	// now this might be rotated, so convert it back
+    coveredFrame = [[self window] convertRect:coveredFrame toView:[self superview]];
+    NSLog(@"coveredFrame: %@", NSStringFromCGRect(coveredFrame));
+	// set inset to make up for covered array at bottom
+    [self setContentInset:UIEdgeInsetsMake(0, 0, ownFrame.size.width + coveredFrame.size.height, 0)];
+    [self setScrollIndicatorInsets:[self contentInset]];
+
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [self setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self setScrollIndicatorInsets:[self contentInset]];
+}
 
 #pragma mark -
 
 - (void)dealloc {
     [_searchButton release];
     [_searchTextField release];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super dealloc];
 }

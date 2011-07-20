@@ -17,7 +17,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SearchView : UIView {
+@interface SearchView : UIScrollView {
     UITextField *_searchTextField;
     UIButton *_searchButton;
 }
