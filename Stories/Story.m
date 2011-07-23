@@ -95,7 +95,7 @@
 
 - (NSString *)HTML {
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm"];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' h:mm aaa"];
     
     NSMutableString *output = [[NSMutableString alloc] init];
     
@@ -103,6 +103,7 @@
     [output appendString:@"<style \"type\"=\"text/css\">\r\n"];
     [output appendString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base" ofType:@"css"] encoding:NSUTF8StringEncoding error:nil]];
     [output appendString:@"</style>\r\n</head>\r\n"];
+
     [output appendString:@"<body>\r\n"];
     [output appendString:@"<div class=\"story\">\r\n"];
     [output appendFormat:@"<h1>%@</h1>\r\n", [self title]];

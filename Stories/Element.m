@@ -96,7 +96,7 @@
 
 - (NSString *)HTML {
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm"];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' h:mm aaa"];
     
     NSMutableString *output = [[NSMutableString alloc] init];
     
@@ -153,9 +153,9 @@
         [output appendString:@"<div class=\"author\">"];
         
         if ([[self author] permalinkURL]) {
-            [output appendFormat:@"<span class=\"name\"><a href=\"%@\">%@</a></span>", [[self author] permalinkURL], [[self author] name]];
+            [output appendFormat:@"<span class=\"name\"><a href=\"%@\">%@</a></span>\r\n", [[self author] permalinkURL], [[self author] name]];
         } else {
-            [output appendFormat:@"<span class=\"name\">%@</span>", [[self author] name]];
+            [output appendFormat:@"<span class=\"name\">%@</span>\r\n", [[self author] name]];
         }
         
         [output appendFormat:@"<span class=\"permalink\"><img src=\"%@\" alt=\"\"/><a href=\"%@\">%@</a></span>", [self faviconURL], [self permalinkURL], [dateFormatter stringFromDate:[self creationDate]]];
