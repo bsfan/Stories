@@ -51,7 +51,6 @@
 		A6A309D813D20EAA00217831 /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309D713D20EAA00217831 /* Element.m */; };
 		A6A309E613D21F5800217831 /* StoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309E513D21F5800217831 /* StoryView.m */; };
 		A6A309E913D22FEE00217831 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A309E813D22FEE00217831 /* Image.m */; };
-		A6C9876913D33F0B0045F676 /* winning.json in Resources */ = {isa = PBXBuildFile; fileRef = A6C9876813D33F0B0045F676 /* winning.json */; };
 		A6E24EEA13D34DB800F67813 /* base.css in Resources */ = {isa = PBXBuildFile; fileRef = A6E24EE913D34DB800F67813 /* base.css */; };
 /* End PBXBuildFile section */
 
@@ -133,7 +132,6 @@
 		A6A309E513D21F5800217831 /* StoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryView.m; sourceTree = "<group>"; };
 		A6A309E713D22FEE00217831 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		A6A309E813D22FEE00217831 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
-		A6C9876813D33F0B0045F676 /* winning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = winning.json; sourceTree = "<group>"; };
 		A6E24EE913D34DB800F67813 /* base.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = base.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -267,7 +265,6 @@
 				09BE00E913D46DAD003E3AB5 /* iTunesArtwork */,
 				096C3E5B13D44DF800355751 /* Icon-72.png */,
 				A6E24EE913D34DB800F67813 /* base.css */,
-				A6C9876813D33F0B0045F676 /* winning.json */,
 				09872CE913D1F897003FB29A /* Stories-Info.plist */,
 				09872CEA13D1F897003FB29A /* InfoPlist.strings */,
 				09872CED13D1F897003FB29A /* Stories-Prefix.pch */,
@@ -386,6 +383,7 @@
 		09872CD413D1F897003FB29A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Mirego, Inc.";
 			};
 			buildConfigurationList = 09872CD713D1F897003FB29A /* Build configuration list for PBXProject "Stories" */;
@@ -411,7 +409,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				09872CEC13D1F897003FB29A /* InfoPlist.strings in Resources */,
-				A6C9876913D33F0B0045F676 /* winning.json in Resources */,
 				095269C113D337820049BEE0 /* Background.png in Resources */,
 				095269C213D337820049BEE0 /* Magnifier.png in Resources */,
 				095269C313D337820049BEE0 /* SearchAppLogo.png in Resources */,
